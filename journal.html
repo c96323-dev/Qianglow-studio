@@ -1,130 +1,479 @@
 <!DOCTYPE html>
-<html lang="zh-TW">
-
+<html lang="zh-Hant">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-  <title>宜蘭羅東美睫文章｜日式美睫・睫毛管理｜芊光 Studio</title>
-
-  <meta name="description" content="宜蘭羅東日式美睫推薦｜芊光 Studio 分享睫毛管理、自然感眼神設計、新手媽媽適合的接睫毛建議與美睫保養知識。">
-
-  <meta name="keywords" content="宜蘭美睫,羅東美睫,日式美睫,睫毛管理,接睫毛推薦,新手媽媽美睫,芊光Studio">
-
-  <meta name="author" content="芊光 Studio">
-
-  <!-- Favicon -->
-  <link rel="icon" type="image/png" href="/favicon.png">
-  <link rel="apple-touch-icon" href="/favicon.png">
-
-  <!-- Canonical -->
-  <link rel="canonical" href="https://qianglow.com/journal.html">
-
-  <!-- Open Graph -->
-  <meta property="og:title" content="宜蘭羅東美睫文章｜芊光 Studio">
-  <meta property="og:description" content="分享日式美睫、睫毛管理與自然感眼神設計。">
-  <meta property="og:image" content="https://qianglow.com/favicon.png">
-  <meta property="og:url" content="https://qianglow.com/journal.html">
-  <meta property="og:type" content="website">
-  <meta property="og:locale" content="zh_TW">
-
-  <!-- Twitter -->
-  <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="宜蘭羅東美睫文章｜芊光 Studio">
-  <meta name="twitter:description" content="分享日式美睫、睫毛管理與自然感眼神設計。">
-  <meta name="twitter:image" content="https://qianglow.com/favicon.png">
-
-  <!-- Google Fonts -->
+  <meta name="description" content="芊光 Studio Journal。分享日式美睫、睫毛管理、自然感眼神設計與新手媽媽適合的美睫日常。">
+  <title>芊光 Journal｜宜蘭羅東日式美睫文章</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-
   <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@300;400;500&family=EB+Garamond:ital,wght@0,400;0,500;1,400&display=swap" rel="stylesheet">
 
-  <!-- Beauty Salon Schema -->
-  <script type="application/ld+json">
-  {
-    "@context":"https://schema.org",
-    "@type":"BeautySalon",
-    "name":"芊光 Studio",
-    "alternateName":"羅東美睫芊光",
-    "url":"https://qianglow.com/",
-    "logo":"https://qianglow.com/favicon.png",
-    "image":"https://qianglow.com/favicon.png",
-    "description":"宜蘭羅東日式美睫推薦，提供睫毛管理、自然感眼神設計與新手媽媽友善美睫服務。",
-    "address":{
-      "@type":"PostalAddress",
-      "addressLocality":"羅東鎮",
-      "addressRegion":"宜蘭縣",
-      "addressCountry":"TW"
-    },
-    "areaServed":[
-      "宜蘭",
-      "羅東",
-      "冬山",
-      "五結",
-      "宜蘭市"
-    ]
-  }
-  </script>
+  <style>
+    :root {
+      --bg: #f5f2ee;
+      --bg-card: #faf8f5;
+      --ink: #2a2520;
+      --ink-light: #7a746c;
+      --ink-faint: #b8b0a5;
+      --accent: #8a7560;
+      --line: #ddd8d0;
+      --serif: 'Noto Serif TC', 'Georgia', serif;
+      --roman: 'EB Garamond', 'Georgia', serif;
+    }
 
-  <!-- Breadcrumb -->
-  <script type="application/ld+json">
-  {
-    "@context":"https://schema.org",
-    "@type":"BreadcrumbList",
-    "itemListElement":[
-      {
-        "@type":"ListItem",
-        "position":1,
-        "name":"首頁",
-        "item":"https://qianglow.com/"
-      },
-      {
-        "@type":"ListItem",
-        "position":2,
-        "name":"宜蘭羅東美睫日記",
-        "item":"https://qianglow.com/journal.html"
+    *, *::before, *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      font-size: 16px;
+      scroll-behavior: smooth;
+    }
+
+    body {
+      background: var(--bg);
+      color: var(--ink);
+      font-family: var(--serif);
+      font-weight: 300;
+      line-height: 1.9;
+      -webkit-font-smoothing: antialiased;
+      min-height: 100vh;
+    }
+
+    /* ── noise texture overlay ── */
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.035'/%3E%3C/svg%3E");
+      pointer-events: none;
+      z-index: 0;
+      opacity: 0.6;
+    }
+
+    /* ── layout wrapper ── */
+    .page {
+      position: relative;
+      z-index: 1;
+      max-width: 680px;
+      margin: 0 auto;
+      padding: 0 28px;
+    }
+
+    /* ── top nav ── */
+    .site-nav {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 32px 0 28px;
+      border-bottom: 1px solid var(--line);
+    }
+
+    .site-nav a {
+      text-decoration: none;
+      color: var(--ink-light);
+      font-family: var(--roman);
+      font-size: 0.8rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      transition: color 0.25s;
+    }
+
+    .site-nav a:hover {
+      color: var(--accent);
+    }
+
+    .nav-logo {
+      font-family: var(--roman);
+      font-size: 0.78rem;
+      letter-spacing: 0.25em;
+      color: var(--ink) !important;
+      font-weight: 500;
+    }
+
+    /* ── masthead ── */
+    .masthead {
+      padding: 72px 0 56px;
+      animation: fadeUp 0.9s ease both;
+    }
+
+    .masthead-label {
+      font-family: var(--roman);
+      font-size: 0.7rem;
+      letter-spacing: 0.3em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 20px;
+      display: block;
+    }
+
+    .masthead h1 {
+      font-size: clamp(2rem, 5vw, 2.8rem);
+      font-weight: 400;
+      letter-spacing: 0.06em;
+      line-height: 1.35;
+      color: var(--ink);
+      margin-bottom: 24px;
+    }
+
+    .masthead-sub {
+      font-size: 0.88rem;
+      color: var(--ink-light);
+      line-height: 1.85;
+      max-width: 440px;
+      border-left: 1.5px solid var(--line);
+      padding-left: 18px;
+    }
+
+    /* ── section divider ── */
+    .section-rule {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      margin: 0 0 40px;
+    }
+
+    .section-rule span {
+      font-family: var(--roman);
+      font-size: 0.68rem;
+      letter-spacing: 0.28em;
+      text-transform: uppercase;
+      color: var(--ink-faint);
+      white-space: nowrap;
+    }
+
+    .section-rule::after {
+      content: '';
+      flex: 1;
+      height: 1px;
+      background: var(--line);
+    }
+
+    /* ── article card ── */
+    .articles {
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+    }
+
+    .article-card {
+      display: block;
+      text-decoration: none;
+      color: inherit;
+      background: var(--bg-card);
+      border: 1px solid var(--line);
+      padding: 44px 40px 40px;
+      position: relative;
+      overflow: hidden;
+      transition: border-color 0.3s, transform 0.3s;
+      animation: fadeUp 0.9s ease both;
+    }
+
+    .article-card:nth-child(1) { animation-delay: 0.15s; }
+    .article-card:nth-child(2) { animation-delay: 0.25s; }
+    .article-card:nth-child(3) { animation-delay: 0.35s; }
+
+    .article-card::before {
+      content: '';
+      position: absolute;
+      left: 0;
+      top: 0;
+      bottom: 0;
+      width: 2px;
+      background: var(--accent);
+      transform: scaleY(0);
+      transform-origin: bottom;
+      transition: transform 0.35s ease;
+    }
+
+    .article-card:hover {
+      border-color: #c8bfb4;
+      transform: translateX(3px);
+    }
+
+    .article-card:hover::before {
+      transform: scaleY(1);
+    }
+
+    .card-meta {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      margin-bottom: 20px;
+    }
+
+    .card-no {
+      font-family: var(--roman);
+      font-size: 0.68rem;
+      letter-spacing: 0.25em;
+      color: var(--accent);
+    }
+
+    .card-tag {
+      font-size: 0.68rem;
+      letter-spacing: 0.1em;
+      color: var(--ink-faint);
+      background: var(--bg);
+      border: 1px solid var(--line);
+      padding: 2px 10px;
+      border-radius: 2px;
+    }
+
+    .card-title {
+      font-size: 1.05rem;
+      font-weight: 400;
+      letter-spacing: 0.04em;
+      line-height: 1.6;
+      color: var(--ink);
+      margin-bottom: 14px;
+    }
+
+    .card-desc {
+      font-size: 0.82rem;
+      color: var(--ink-light);
+      line-height: 1.85;
+      margin-bottom: 28px;
+    }
+
+    .card-read {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-family: var(--roman);
+      font-size: 0.72rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--accent);
+      transition: gap 0.25s;
+    }
+
+    .card-read::after {
+      content: '→';
+      transition: transform 0.25s;
+    }
+
+    .article-card:hover .card-read {
+      gap: 12px;
+    }
+
+    .article-card:hover .card-read::after {
+      transform: translateX(3px);
+    }
+
+    /* ── coming soon card ── */
+    .card-coming {
+      background: transparent;
+      border: 1px dashed var(--line);
+      padding: 32px 40px;
+      display: flex;
+      align-items: center;
+      gap: 20px;
+      animation: fadeUp 0.9s ease 0.45s both;
+    }
+
+    .card-coming-dot {
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: var(--ink-faint);
+      flex-shrink: 0;
+      animation: pulse 2.5s ease-in-out infinite;
+    }
+
+    @keyframes pulse {
+      0%, 100% { opacity: 0.3; }
+      50% { opacity: 1; }
+    }
+
+    .card-coming p {
+      font-size: 0.8rem;
+      color: var(--ink-faint);
+      letter-spacing: 0.06em;
+    }
+
+    /* ── footer ── */
+    .journal-footer {
+      margin-top: 80px;
+      padding: 40px 0 56px;
+      border-top: 1px solid var(--line);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 20px;
+      animation: fadeUp 0.9s ease 0.5s both;
+    }
+
+    .footer-cta {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+
+    .footer-cta-label {
+      font-family: var(--roman);
+      font-size: 0.68rem;
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      color: var(--ink-faint);
+    }
+
+    .footer-cta-text {
+      font-size: 0.88rem;
+      color: var(--ink-light);
+      line-height: 1.7;
+    }
+
+    .btn-line {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      text-decoration: none;
+      color: var(--bg-card);
+      background: var(--ink);
+      padding: 13px 28px;
+      font-family: var(--roman);
+      font-size: 0.72rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      transition: background 0.25s, color 0.25s;
+      white-space: nowrap;
+    }
+
+    .btn-line:hover {
+      background: var(--accent);
+    }
+
+    .footer-back {
+      display: block;
+      text-align: center;
+      padding: 24px 0 0;
+      font-family: var(--roman);
+      font-size: 0.72rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--ink-faint);
+      text-decoration: none;
+      transition: color 0.25s;
+    }
+
+    .footer-back:hover {
+      color: var(--accent);
+    }
+
+    .site-footer {
+      text-align: center;
+      padding: 28px 0 36px;
+      font-family: var(--roman);
+      font-size: 0.66rem;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--ink-faint);
+    }
+
+    /* ── animations ── */
+    @keyframes fadeUp {
+      from {
+        opacity: 0;
+        transform: translateY(18px);
       }
-    ]
-  }
-  </script>
-</head>
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
 
+    /* ── vertical text deco ── */
+    .deco-vertical {
+      position: fixed;
+      right: max(20px, calc(50vw - 380px));
+      top: 50%;
+      transform: translateY(-50%) rotate(90deg);
+      font-family: var(--roman);
+      font-size: 0.6rem;
+      letter-spacing: 0.35em;
+      text-transform: uppercase;
+      color: var(--line);
+      white-space: nowrap;
+      pointer-events: none;
+      user-select: none;
+    }
+
+    @media (max-width: 760px) {
+      .deco-vertical { display: none; }
+      .article-card { padding: 32px 24px 28px; }
+      .card-coming { padding: 24px; }
+      .journal-footer { flex-direction: column; align-items: flex-start; }
+      .masthead { padding: 48px 0 40px; }
+    }
+  </style>
+</head>
 <body>
 
-<main class="wrap">
+<div class="deco-vertical">Qianglow Studio · Luodong · Yilan</div>
 
-<div class="brand">
-QIANGLOW  JOURNAL
-</div>
+<div class="page">
 
-<h1>Journal</h1>
+  <!-- nav -->
+  <nav class="site-nav">
+    <a href="https://qianglow.com/index.html" class="nav-logo">Qianglow</a>
+    <div style="display:flex;gap:28px;align-items:center;">
+      <a href="https://qianglow.com/services.html">服務</a>
+      <a href="https://qianglow.com/faq.html">FAQ</a>
+      <a href="https://lin.ee/WfphLRG" style="color:var(--accent);">預約</a>
+    </div>
+  </nav>
 
-<p class="masthead-sub">
-分享宜蘭羅東日式美睫、睫毛管理與自然感眼神設計，
-提供接睫毛保養、新手媽媽美睫建議與自然眼神打造靈感。
+  <!-- masthead -->
+  <header class="masthead">
+    <span class="masthead-label">Journal</span>
+    <h1>宜蘭羅東美睫日記</h1>
+    <p class="masthead-sub">
+分享宜蘭羅東日式美睫、睫毛管理與自然感眼神設計
+提供接睫毛保養、新手媽媽美睫建議與自然眼神打造靈感
 </p>
+  </header>
 
-<div class="card">
-<a href="new-mom-lashes.html">
+  <!-- articles -->
+  <div class="section-rule"><span>All Articles</span></div>
 
-<h2>
-宜蘭新手媽媽適合接睫毛嗎？
-</h2>
+  <div class="articles">
 
-<p>
-不是想變濃妝，而是希望睡不飽的早晨，
-素顏也能看起來比較有精神。
-</p>
+    <a class="article-card" href="https://qianglow.com/new-mom-lashes.html">
+      <div class="card-meta">
+        <span class="card-no">No. 01</span>
+        <span class="card-tag">新手媽媽</span>
+        <span class="card-tag">自然感</span>
+      </div>
+      <h2 class="card-title">宜蘭新手媽媽適合接睫毛嗎？</h2>
+      <p class="card-desc">
+        不是想變濃妝，而是希望在睡不飽、<br>時間不夠的早晨，素顏也能看起來比較有精神。
+      </p>
+      <span class="card-read">Read More</span>
+    </a>
 
-</a>
+    <div class="card-coming">
+      <div class="card-coming-dot"></div>
+      <p>下一篇文章即將發佈，持續關注。</p>
+    </div>
+
+  </div>
+
+  <!-- footer cta -->
+  <footer class="journal-footer">
+    <div class="footer-cta">
+      <span class="footer-cta-label">Book a Visit</span>
+      <p class="footer-cta-text">完全預約制・一對一服務<br>宜蘭羅東火車站附近</p>
+    </div>
+    <a class="btn-line" href="https://lin.ee/WfphLRG">LINE 預約</a>
+  </footer>
+
+  <a class="footer-back" href="https://qianglow.com/index.html">← 返回首頁</a>
+
+  <div class="site-footer">© Qianglow Studio · Luodong</div>
+
 </div>
-
-<a class="back" href="index.html">
-← 返回首頁
-</a>
-
-</main>
-
 </body>
 </html>

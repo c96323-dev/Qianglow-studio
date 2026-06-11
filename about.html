@@ -1,77 +1,198 @@
 <!DOCTYPE html>
 <html lang="zh-TW">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  <title>關於芊光｜宜蘭羅東日式美睫工作室</title>
+<title>關於芊光｜宜蘭羅東日式美睫工作室</title>
 
-  <meta name="description" content="芊光 Studio 位於宜蘭羅東火車站附近，提供一對一完全預約制的日式美睫與睫毛管理服務。專注自然、耐看、有精神的眼神設計，適合新手媽媽與喜歡日系自然感的妳。">
+<meta name="description" content="芊光 Studio 位於宜蘭羅東火車站附近，提供一對一完全預約制的日式美睫與睫毛管理服務。">
 
-  <style>
-    body{
-      font-family:sans-serif;
-      background:#f8f6f1;
-      color:#2d2721;
-      line-height:1.8;
-      padding:40px;
-      max-width:700px;
-      margin:auto;
-    }
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 
-    h1{
-      font-size:32px;
-      margin-bottom:20px;
-    }
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@300;400;500&family=EB+Garamond:ital,wght@0,400;0,500;1,400&display=swap" rel="stylesheet">
 
-    p{
-      margin-bottom:20px;
-    }
+<style>
 
-    a{
-      color:#8d7d6d;
-      text-decoration:none;
-    }
-  </style>
+:root{
+  --bg:#f5f2ee;
+  --bg-card:#faf8f5;
+
+  --ink:#2a2520;
+  --ink-light:#7a746c;
+  --ink-faint:#b8b0a5;
+
+  --accent:#8a7560;
+  --accent-soft:#c4b49e;
+
+  --line:#ddd8d0;
+
+  --serif:'Noto Serif TC',serif;
+  --roman:'EB Garamond',serif;
+}
+
+*{
+  box-sizing:border-box;
+}
+
+body{
+  margin:0;
+  background:var(--bg);
+  color:var(--ink);
+
+  font-family:var(--serif);
+  font-weight:300;
+
+  line-height:1.9;
+  letter-spacing:.02em;
+}
+
+.wrap{
+  max-width:900px;
+  margin:auto;
+  padding:0 24px;
+}
+
+.hero{
+  padding:100px 0 60px;
+}
+
+.hero-sub{
+  font-family:var(--roman);
+  font-size:13px;
+  letter-spacing:.22em;
+  text-transform:uppercase;
+  color:var(--ink-faint);
+  margin-bottom:24px;
+}
+
+.hero-title{
+  font-size:clamp(2rem,5vw,3rem);
+  font-weight:400;
+  line-height:1.7;
+  margin-bottom:30px;
+}
+
+.hero-text{
+  font-size:17px;
+  line-height:2;
+  color:#5f564e;
+}
+
+.about-card{
+  background:var(--bg-card);
+  border:1px solid rgba(120,100,80,.12);
+  border-radius:32px;
+  padding:48px;
+  margin-top:50px;
+}
+
+.about-card p{
+  margin:0 0 24px;
+  color:#5f564e;
+}
+
+.quote{
+  margin-top:30px;
+  padding-top:30px;
+  border-top:1px solid var(--line);
+
+  font-family:var(--serif);
+  font-size:24px;
+  line-height:1.9;
+  color:var(--ink);
+}
+
+.back{
+  margin-top:50px;
+}
+
+.back a{
+  font-family:var(--roman);
+  letter-spacing:.18em;
+  text-transform:uppercase;
+
+  color:var(--accent);
+
+  text-decoration:none;
+}
+
+@media(max-width:768px){
+
+  .hero{
+    padding:60px 0 40px;
+  }
+
+  .hero-title{
+    font-size:30px;
+  }
+
+  .about-card{
+    padding:30px;
+  }
+
+  .quote{
+    font-size:20px;
+  }
+
+}
+
+</style>
+
 </head>
 
 <body>
 
-<h1>關於芊光</h1>
+<section class="hero">
+  <div class="wrap">
 
-<p>
-芊光 Studio 位於宜蘭羅東火車站附近，
-是一間採完全預約制的一對一日式美睫工作室。
-</p>
+    <div class="hero-sub">
+      ABOUT QIANGLOW
+    </div>
 
-<p>
-希望每位來到這裡的客人，
-都能在安靜放鬆的空間裡，
-慢慢找回屬於自己的光。
-</p>
+    <h1 class="hero-title">
+      希望每位來到芊光的人<br>
+      都能慢慢找回屬於自己的光
+    </h1>
 
-<p>
-芊光專注於自然、耐看、有精神的眼神設計，
-擅長日式美睫、睫毛管理與自然感嫁接。
-</p>
+    <p class="hero-text">
+      芊光 Studio 位於宜蘭羅東火車站附近，
+      是一間採完全預約制的一對一日式美睫工作室。
+    </p>
 
-<p>
-特別受到許多新手媽媽、
-喜歡自然妝感與重視舒適感的客人喜愛。
-</p>
+    <div class="about-card">
 
-<p>
-我們相信，
-真正耐看的美，
-不是濃烈，
-而是讓妳看起來更像自己。
-</p>
+      <p>
+        芊光專注於自然、耐看、有精神的眼神設計，
+        擅長日式美睫、睫毛管理與自然感嫁接。
+      </p>
 
-<p>
-<a href="https://qianglow.com">
-返回首頁
-</a>
-</p>
+      <p>
+        特別受到許多新手媽媽、
+        喜歡自然妝感與重視舒適感的客人喜愛。
+      </p>
+
+      <p>
+        來到這裡的客人，
+        很多人不是想變得濃妝或誇張，
+        而是希望在忙碌的生活裡，
+        多一點屬於自己的從容與自信。
+      </p>
+
+      <div class="quote">
+        真正耐看的美，<br>
+        不是濃烈，而是讓妳看起來更像自己。
+      </div>
+
+    </div>
+
+    <div class="back">
+      <a href="index.html">← BACK TO HOME</a>
+    </div>
+
+  </div>
+</section>
 
 </body>
 </html>

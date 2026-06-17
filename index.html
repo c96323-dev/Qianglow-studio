@@ -11,6 +11,7 @@
   <title>芊光 Studio｜宜蘭美睫・羅東美睫・日式睫毛嫁接</title>
   <meta name="description" content="芊光 Studio 位於宜蘭羅東火車站附近，提供日式睫毛嫁接、睫毛管理與客製化眼型設計。完全預約制一對一療癒空間，打造自然耐看且適合自己的宜蘭美睫風格。">
   <meta name="keywords" content="宜蘭美睫,羅東美睫,宜蘭接睫毛,羅東接睫毛,日式美睫,睫毛嫁接,睫毛管理,宜蘭日式美睫,羅東日式美睫,芊光Studio">
+  <meta name="robots" content="index, follow">
   <link rel="canonical" href="https://qianglow.com/">
 
   <!-- ══ OG ══ -->
@@ -28,10 +29,10 @@
   <meta name="twitter:description" content="宜蘭羅東完全預約制日式美睫工作室，打造自然耐看的眼神設計。">
   <meta name="twitter:image" content="https://qianglow.com/space-01.JPG">
 
-  <!-- ══ GEO / LLMO: hreflang ══ -->
+  <!-- ══ GEO hreflang ══ -->
   <link rel="alternate" hreflang="zh-TW" href="https://qianglow.com/">
 
-  <!-- ══ Schema: BeautySalon (GEO / LLMO) ══ -->
+  <!-- ══ Schema: BeautySalon ══ -->
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
@@ -41,9 +42,8 @@
     "alternateName": ["羅東美睫芊光", "宜蘭美睫芊光", "芊光美睫"],
     "url": "https://qianglow.com/",
     "image": "https://qianglow.com/space-01.JPG",
-    "description": "芊光 Qianglow Studio 位於宜蘭羅東火車站附近，是一間完全預約制的一對一日式美睫工作室，提供宜蘭美睫、羅東美睫、日式睫毛嫁接、睫毛管理與野生眉服務。專注自然、耐看、有精神的眼神設計，適合新手媽媽與喜歡日系自然感的妳。",
+    "description": "芊光 Qianglow Studio 位於宜蘭羅東火車站附近，是一間完全預約制的一對一日式美睫工作室，提供宜蘭美睫、羅東美睫、日式睫毛嫁接、睫毛管理與野生眉服務。",
     "priceRange": "NT$1,000–NT$1,300",
-    "telephone": "",
     "address": {
       "@type": "PostalAddress",
       "streetAddress": "安平路35號2樓",
@@ -87,33 +87,6 @@
         "closes": "19:00"
       }
     ],
-    "aggregateRating": {
-      "@type": "AggregateRating",
-      "ratingValue": "5",
-      "reviewCount": "3",
-      "bestRating": "5",
-      "worstRating": "1"
-    },
-    "review": [
-      {
-        "@type": "Review",
-        "author": { "@type": "Person", "name": "產後媽媽｜羅東" },
-        "reviewRating": { "@type": "Rating", "ratingValue": "5", "bestRating": "5" },
-        "reviewBody": "第一次接睫毛，但完全沒有不舒服的感覺。"
-      },
-      {
-        "@type": "Review",
-        "author": { "@type": "Person", "name": "護理師｜宜蘭" },
-        "reviewRating": { "@type": "Rating", "ratingValue": "5", "bestRating": "5" },
-        "reviewBody": "素顏看起來有精神很多，早上真的省很多時間。"
-      },
-      {
-        "@type": "Review",
-        "author": { "@type": "Person", "name": "新手媽媽｜冬山" },
-        "reviewRating": { "@type": "Rating", "ratingValue": "5", "bestRating": "5" },
-        "reviewBody": "安靜到差點睡著，很像來休息的地方。"
-      }
-    ],
     "hasOfferCatalog": {
       "@type": "OfferCatalog",
       "name": "芊光服務項目",
@@ -144,7 +117,7 @@
   }
   </script>
 
-  <!-- ══ Schema: FAQPage (AEO / LLMO) ══ -->
+  <!-- ══ Schema: FAQPage ══ -->
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
@@ -186,7 +159,7 @@
   }
   </script>
 
-  <!-- ══ Schema: WebSite + SearchAction (LLMO) ══ -->
+  <!-- ══ Schema: WebSite ══ -->
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
@@ -269,6 +242,7 @@ img{ width:100%; display:block; }
   letter-spacing:.28em;
   text-transform:uppercase;
   color:var(--ink);
+  text-decoration:none;
 }
 .nav-links{
   display:flex;
@@ -279,6 +253,7 @@ img{ width:100%; display:block; }
   text-transform:uppercase;
   color:var(--ink-light);
 }
+.nav-links a:hover{ color:var(--ink); }
 
 /* HERO */
 .hero{
@@ -297,7 +272,6 @@ img{ width:100%; display:block; }
   margin-bottom:24px;
 }
 
-/* ── 修正：移除 <br>，讓標題自然換行 ── */
 .hero-title{
   font-family:var(--serif);
   font-size:clamp(1.6rem, 3.8vw, 2.6rem);
@@ -450,11 +424,18 @@ img{ width:100%; display:block; }
 }
 
 /* JOURNAL */
+.journal-grid{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:18px;
+}
 .journal-card{
   background:#fbf8f4;
   border:1px solid rgba(120,100,80,.14);
   border-radius:32px;
-  padding:42px;
+  padding:36px;
+  display:flex;
+  flex-direction:column;
 }
 .journal-number{
   color:#9b8d80;
@@ -464,14 +445,21 @@ img{ width:100%; display:block; }
 }
 .journal-card h3{
   font-family:"Noto Serif TC",serif;
-  font-size:30px;
+  font-size:22px;
   line-height:1.65;
-  margin:0 0 18px;
+  margin:0 0 14px;
+  flex:1;
 }
 .journal-card p{
   color:#5f564e;
-  font-size:16px;
-  margin:0 0 28px;
+  font-size:15px;
+  margin:0 0 24px;
+  line-height:1.8;
+}
+.journal-card .btn-light{
+  padding:11px 22px;
+  font-size:0.75rem;
+  align-self:flex-start;
 }
 
 /* MAP IG */
@@ -535,56 +523,23 @@ img{ width:100%; display:block; }
 /* ── MOBILE ── */
 @media(max-width:768px){
   .wrap{ padding:0 22px; }
-
   .nav-inner{ align-items:center; gap:14px; }
   .logo{ font-size:21px; }
   .nav-links{ gap:16px; font-size:14px; overflow-x:auto; padding-bottom:4px; }
-
   .hero{ padding:54px 0 46px; }
-
-  /* ── 手機改為單欄，圖片放下方 ── */
-  .hero-grid{
-    display:grid;
-    grid-template-columns:1fr;
-    gap:36px;
-    align-items:start;
-  }
-
+  .hero-grid{ display:grid; grid-template-columns:1fr; gap:36px; align-items:start; }
   .hero-sub{ font-size:12px; letter-spacing:.16em; margin-bottom:20px; }
-
-  /* ── 手機字體自然換行，不強制斷行 ── */
-  .hero-title{
-    font-size:clamp(1.5rem, 6vw, 2rem);
-    line-height:1.65;
-    letter-spacing:.03em;
-    margin-bottom:20px;
-    word-break:keep-all;
-  }
-
+  .hero-title{ font-size:clamp(1.5rem, 6vw, 2rem); line-height:1.65; letter-spacing:.03em; margin-bottom:20px; word-break:keep-all; }
   .hero-text{ font-size:16px; line-height:2; margin-bottom:30px; }
-
-  .hero-image{
-    min-height:700px;
-    border-radius:28px;
-  }
-
+  .hero-image{ min-height:700px; border-radius:28px; }
   .section{ padding:58px 0; }
   .section-title{ font-size:29px; line-height:1.7; }
   .section-text{ font-size:16px; line-height:2; }
-
-  .service-grid,
-  .voice-grid,
-  .info-grid{ grid-template-columns:1fr; }
-
-  .service-card,
-  .voice-card,
-  .info-card{ padding:26px 24px; }
-
+  .service-grid, .voice-grid, .info-grid, .journal-grid{ grid-template-columns:1fr; }
+  .service-card, .voice-card, .info-card{ padding:26px 24px; }
   .voice-text{ font-size:20px; line-height:1.9; }
-
-  .journal-card{ padding:30px 26px; }
-  .journal-card h3{ font-size:25px; }
-
+  .journal-card{ padding:28px 24px; }
+  .journal-card h3{ font-size:21px; }
   .cta{ padding:72px 0 78px; }
   .cta h2{ font-size:28px; line-height:1.85; }
 }
@@ -595,7 +550,7 @@ img{ width:100%; display:block; }
 
 <header class="nav">
   <div class="wrap nav-inner">
-    <div class="logo">芊光 Studio</div>
+    <a href="https://qianglow.com/" class="logo">芊光 Studio</a>
     <nav class="nav-links" aria-label="主選單">
       <a href="about.html">關於芊光</a>
       <a href="services.html">服務項目</a>
@@ -612,13 +567,10 @@ img{ width:100%; display:block; }
     <div class="wrap hero-grid">
       <div class="hero-content">
         <div class="hero-sub">YILAN · LUODONG LASH STUDIO</div>
-
         <h1 class="hero-title">每天都在照顧別人的妳，<br>今天先溫柔一點對待自己</h1>
-
         <p class="hero-text">
           芊光 Studio 位於宜蘭羅東火車站附近，是一間完全預約制的一對一美睫工作室，提供宜蘭美睫、羅東美睫、睫毛嫁接與睫毛管理服務，打造自然耐看且適合自己的眼神設計。
         </p>
-
         <div class="hero-buttons">
           <a href="https://lin.ee/WfphLRG" class="btn-dark" target="_blank" rel="noopener">立即預約</a>
           <a href="services.html" class="btn-light">查看服務項目</a>
@@ -693,13 +645,30 @@ img{ width:100%; display:block; }
   </section>
 
   <!-- ══ JOURNAL ══ -->
-  <section class="section">
+  <section class="section" aria-labelledby="journal-heading">
     <div class="wrap">
-      <div class="journal-card">
-        <div class="journal-number">JOURNAL 01</div>
-        <h3>宜蘭新手媽媽適合接睫毛嗎？</h3>
-        <p>很多新手媽媽不是想變濃妝，而是希望在睡不飽、時間不夠的早晨，素顏也能看起來比較有精神。</p>
-        <a href="journal.html" class="btn-light">閱讀美睫日記</a>
+      <div class="section-sub">JOURNAL</div>
+      <h2 class="section-title" id="journal-heading">美睫日記</h2>
+      <p class="section-text">關於接睫毛的大小事，寫給第一次來的妳。</p>
+      <div class="journal-grid">
+        <div class="journal-card">
+          <div class="journal-number">No. 01</div>
+          <h3>宜蘭新手媽媽適合接睫毛嗎？</h3>
+          <p>不是想變濃妝，而是希望素顏也能看起來有精神。</p>
+          <a href="new-mom-lashes.html" class="btn-light">閱讀文章</a>
+        </div>
+        <div class="journal-card">
+          <div class="journal-number">No. 02</div>
+          <h3>接睫毛可以維持多久？</h3>
+          <p>答案因人而異，但有幾件事可以幫助妳維持更久。</p>
+          <a href="lash-retention.html" class="btn-light">閱讀文章</a>
+        </div>
+        <div class="journal-card">
+          <div class="journal-number">No. 03</div>
+          <h3>第一次接睫毛前要注意什麼？</h3>
+          <p>預約前了解這些小細節，讓施作過程更舒適。</p>
+          <a href="first-lash-tips.html" class="btn-light">閱讀文章</a>
+        </div>
       </div>
     </div>
   </section>

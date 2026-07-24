@@ -516,6 +516,36 @@
       border-radius: 2px;
     }
 
+    .related-list { display: flex; flex-direction: column; gap: 10px; }
+
+    .related-card {
+      display: block;
+      text-decoration: none;
+      background: var(--bg-card);
+      border: 1px solid var(--line);
+      padding: 20px 18px;
+      position: relative;
+      overflow: hidden;
+      transition: border-color 0.25s, transform 0.25s;
+    }
+    .related-card::before {
+      content: '';
+      position: absolute; left: 0; top: 0; bottom: 0;
+      width: 2px; background: var(--accent);
+      transform: scaleY(0); transform-origin: bottom;
+      transition: transform 0.3s;
+    }
+    .related-card:hover { border-color: #c8bfb4; transform: translateX(3px); }
+    .related-card:hover::before { transform: scaleY(1); }
+    .related-no {
+      font-family: var(--roman);
+      font-size: 0.62rem;
+      letter-spacing: 0.22em;
+      color: var(--accent);
+      margin-bottom: 6px;
+    }
+    .related-title { font-size: 0.82rem; color: var(--ink); line-height: 1.6; }
+
     .article-footer {
       max-width: 920px; margin: 0 auto; padding: 40px 28px 72px;
       border-top: 1px solid var(--line);
@@ -800,6 +830,20 @@
             <p class="sidebar-cta-label">Book a Visit</p>
             <p class="sidebar-cta-text">完全預約制・一對一服務<br>宜蘭羅東火車站附近</p>
             <a class="sidebar-cta-btn" href="https://lin.ee/WfphLRG">LINE 立即預約</a>
+          </div>
+        </div>
+
+        <div class="sidebar-block">
+          <p class="sidebar-label">延伸閱讀</p>
+          <div class="related-list">
+            <a class="related-card" href="https://qianglow.com/new-mom-lashes.html">
+              <p class="related-no">No. 01</p>
+              <p class="related-title">宜蘭新手媽媽適合接睫毛嗎？</p>
+            </a>
+            <a class="related-card" href="https://qianglow.com/lash-damage-truth.html">
+              <p class="related-no">No. 04</p>
+              <p class="related-title">接睫毛會傷害真睫毛嗎？美睫師告訴妳真正的原因</p>
+            </a>
           </div>
         </div>
 

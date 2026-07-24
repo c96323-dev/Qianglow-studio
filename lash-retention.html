@@ -29,7 +29,7 @@
 
   <!-- ── Fonts ── -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@300;400;500&family=EB+Garamond:ital,wght@0,400;0,500;1,400;1,500&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@300;400;500&family=EB+Garamond:ital,wght@0,500;1,400;1,500&display=swap" rel="stylesheet">
 
   <!-- ── Schema.org: BlogPosting ── -->
   <script type="application/ld+json">
@@ -437,6 +437,8 @@
       border-radius: 2px;
     }
 
+    .related-list { display: flex; flex-direction: column; gap: 10px; }
+
     .related-card {
       display: block;
       text-decoration: none;
@@ -631,18 +633,10 @@
         <h2 data-no="01">持久度取決於哪些因素？</h2>
         <p>睫毛嫁接的持久度，會依照每個人的睫毛生長週期、清潔習慣及生活作息而有所不同。並沒有一個固定的答案，但一般來說：</p>
 
-        <div class="stat-cards">
+        <div class="stat-cards" style="grid-template-columns: 1fr;">
           <div class="stat-card">
-            <span class="stat-no">3–6</span>
-            <span class="stat-label">週，一般維持區間</span>
-          </div>
-          <div class="stat-card">
-            <span class="stat-no">28</span>
-            <span class="stat-label">天，睫毛自然生長週期</span>
-          </div>
-          <div class="stat-card">
-            <span class="stat-no">1×</span>
-            <span class="stat-label">每天清潔，維持最佳狀態</span>
+            <span class="stat-no">3–6 週</span>
+            <span class="stat-label">一般維持區間，依睫毛生長週期（約 28 天）與清潔習慣而有差異</span>
           </div>
         </div>
 
@@ -699,10 +693,16 @@
 
         <div class="sidebar-block">
           <p class="sidebar-label">延伸閱讀</p>
-          <a class="related-card" href="https://qianglow.com/new-mom-lashes.html">
-            <p class="related-no">No. 01</p>
-            <p class="related-title">宜蘭新手媽媽適合接睫毛嗎？</p>
-          </a>
+          <div class="related-list">
+            <a class="related-card" href="https://qianglow.com/new-mom-lashes.html">
+              <p class="related-no">No. 01</p>
+              <p class="related-title">宜蘭新手媽媽適合接睫毛嗎？</p>
+            </a>
+            <a class="related-card" href="https://qianglow.com/lash-damage-truth.html">
+              <p class="related-no">No. 04</p>
+              <p class="related-title">接睫毛會傷害真睫毛嗎？美睫師告訴妳真正的原因</p>
+            </a>
+          </div>
         </div>
 
         <div class="sidebar-block">
@@ -741,4 +741,3 @@
 
 </body>
 </html>
-

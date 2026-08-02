@@ -1,0 +1,153 @@
+<!doctype html>
+<html lang="zh-Hant">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <title>芊光 Qianglow Studio | 眼型測驗</title>
+    <meta name="description" content="芊光 Qianglow Studio 互動式眼型測驗，提供專屬睫毛設計建議與 LINE 預約入口。" />
+    <meta name="theme-color" content="#F8F4EE" />
+    <meta property="og:title" content="芊光 Qianglow Studio 眼型測驗" />
+    <meta property="og:description" content="6 題找出你的眼型與專屬睫毛設計。" />
+    <link rel="icon" href="/favicon.ico" sizes="any">
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon.png">
+    <link rel="apple-touch-icon" href="/favicon.png">
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&family=Noto+Serif+TC:wght@400;500;600;700&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="styles.css" />
+    <script src="https://static.line-scdn.net/liff/edge/2/sdk.js" defer></script>
+    <script src="app.js" defer></script>
+  </head>
+  <body>
+    <main id="app" class="app-shell">
+      <section class="screen screen-home is-active" data-screen="home" aria-labelledby="home-title">
+        <div class="ambient ambient-one"></div>
+        <div class="ambient ambient-two"></div>
+        <header class="topbar">
+          <div>
+            <p class="eyebrow">Qianglow Studio</p>
+            <p class="brand-line">芊光專屬眼型診斷</p>
+          </div>
+          <button class="icon-button" type="button" data-action="share" aria-label="分享測驗">
+            <span aria-hidden="true">↗</span>
+          </button>
+        </header>
+        <div class="hero-grid">
+          <div class="hero-copy">
+            <p class="kicker">6 questions · 90 seconds</p>
+            <h1 id="home-title">找到最適合<br />你眼型的<br />睫毛設計</h1>
+            <p class="intro">依照眼型、原生睫毛與日常妝感，芊光會為你整理專屬分析、Curl、長度、粗細與保養建議。</p>
+            <div class="hero-actions">
+              <button class="primary-button" type="button" data-action="start">開始測驗</button>
+              <button class="text-button" type="button" data-action="scroll-knowledge">先看小知識</button>
+            </div>
+          </div>
+          <figure class="hero-visual" aria-label="芊光日系精品眼睫視覺">
+            <img src="assets/qianglow-hero.png" alt="柔和日系美睫視覺" />
+            <figcaption>
+              <span>Personal lash curation</span>
+              <strong>Qianglow</strong>
+            </figcaption>
+          </figure>
+        </div>
+        <section class="knowledge-strip" id="knowledge" aria-label="美睫小知識">
+          <article>
+            <span>01</span>
+            <h2>眼型先決定方向</h2>
+            <p>同樣的長度放在不同眼型，會呈現完全不同的放大感與線條。</p>
+          </article>
+          <article>
+            <span>02</span>
+            <h2>原生睫毛決定承重</h2>
+            <p>細軟、易垂或稀疏睫毛，需要更細緻的粗細與翹度配置。</p>
+          </article>
+          <article>
+            <span>03</span>
+            <h2>妝感決定濃淡</h2>
+            <p>自然裸妝與精緻眼妝適合的密度、線條與眼尾安排都不同。</p>
+          </article>
+        </section>
+      </section>
+
+      <section class="screen screen-quiz" data-screen="quiz" aria-live="polite">
+        <header class="quiz-header">
+          <button class="ghost-button" type="button" data-action="back-home">返回</button>
+          <div class="progress-shell" aria-label="測驗進度">
+            <div class="progress-meta">
+              <span id="stepLabel">Question 1</span>
+              <span id="stepCount">1 / 6</span>
+            </div>
+            <div class="progress-track">
+              <div id="progressBar" class="progress-bar"></div>
+            </div>
+          </div>
+        </header>
+        <div class="question-panel">
+          <p id="questionEyebrow" class="eyebrow">Eye shape</p>
+          <h2 id="questionTitle"></h2>
+          <p id="questionHint" class="question-hint"></p>
+          <div id="answers" class="answer-grid"></div>
+        </div>
+      </section>
+
+      <section class="screen screen-loading" data-screen="loading" aria-live="assertive">
+        <div class="loading-card">
+          <div class="lash-loader" aria-hidden="true">
+            <span></span><span></span><span></span><span></span><span></span>
+          </div>
+          <p class="eyebrow">Analyzing</p>
+          <h2>正在整理你的眼型線條與睫毛條件</h2>
+          <p>芊光會用更溫柔的方式，找出適合你日常的放大感。</p>
+        </div>
+      </section>
+
+      <section class="screen screen-result" data-screen="result" aria-live="polite">
+        <header class="result-hero">
+          <p class="eyebrow">Your lash profile</p>
+          <h2 id="resultTitle"></h2>
+          <p id="resultSummary"></p>
+        </header>
+        <div class="result-layout">
+          <section class="result-card analysis-card">
+            <span class="card-index">01</span>
+            <h3>眼型分析</h3>
+            <p id="resultAnalysis"></p>
+          </section>
+          <section class="result-card design-card">
+            <span class="card-index">02</span>
+            <h3>推薦睫毛設計</h3>
+            <p id="resultDesign"></p>
+            <dl class="spec-list">
+              <div><dt>Curl</dt><dd id="resultCurl"></dd></div>
+              <div><dt>長度</dt><dd id="resultLength"></dd></div>
+              <div><dt>粗細</dt><dd id="resultThickness"></dd></div>
+            </dl>
+          </section>
+          <section class="result-card care-card">
+            <span class="card-index">03</span>
+            <h3>保養建議</h3>
+            <p id="resultCare"></p>
+          </section>
+        </div>
+        <section class="work-section" aria-labelledby="work-title">
+          <div class="section-heading">
+            <p class="eyebrow">Real cases</p>
+            <h3 id="work-title">推薦真人作品</h3>
+          </div>
+          <div id="caseCarousel" class="case-carousel"></div>
+        </section>
+        <section class="booking-panel" aria-label="LINE 預約">
+          <div>
+            <p class="eyebrow">Reservation</p>
+            <h3>把結果傳給芊光，預約前先完成溝通。</h3>
+          </div>
+          <div class="booking-actions">
+            <a id="lineBooking" class="primary-button" href="https://lin.ee/rspH0C2" target="_blank" rel="noreferrer">LINE 預約</a>
+            <button class="secondary-button" type="button" data-action="restart">重新測驗</button>
+            <button class="text-button" type="button" data-action="share-result">分享結果</button>
+          </div>
+        </section>
+      </section>
+    </main>
+  </body>
+</html>

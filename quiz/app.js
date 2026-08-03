@@ -1,4 +1,4 @@
-const LINE_BOOKING_URL = "https://lin.ee/rspH0C2";
+const LINE_BOOKING_URL = "https://lin.ee/Pa0mkmD";
 const LIFF_ID = "";
 
 const questions = [
@@ -381,7 +381,7 @@ const renderResult = () => {
   $("#resultSummary").textContent = result.summary;
   $("#resultAnalysis").textContent = result.analysis;
   $("#resultLength").textContent = result.length;
-  $("#lineBooking").href = buildLineUrl(result);
+  $("#lineBooking").href = LINE_BOOKING_URL;
 
   // 建議妝感卡片（由 Q4 + Q5 決定唯一一款）
   state.currentIntensity = getIntensityLevel();
@@ -430,11 +430,35 @@ const renderResult = () => {
   if (eggEl) eggEl.textContent = easterEggs[state.currentResult] || "";
 };
 
-const buildLineUrl = (result) => {
-  const message = encodeURIComponent(
-    `您好，我完成芊光眼型測驗，結果是「${result.name}」。想預約並討論適合我的睫毛設計。`
-  );
-  return `https://line.me/R/msg/text/?${message}`;
+const buildResultMessage = (result) =>
+  `您好，我完成芊光眼型測驗，結果是「${result.name}」。想預約並討論適合我的睫毛設計。`;
+
+// ── 複製提示 toast（獨立於選題回饋 toast，避免衝突） ──
+const showCopyToast = (msg) => {
+  let toast = $("#copy-toast");
+  if (!toast) {
+    toast = document.createElement("div");
+    toast.id = "copy-toast";
+    toast.style.cssText = `
+      position:fixed; bottom:32px; left:50%; transform:translateX(-50%) translateY(20px);
+      background:rgba(44,40,37,0.92); color:#fdf9f2;
+      padding:12px 24px; border-radius:999px;
+      font-family:'Noto Serif TC',serif; font-size:0.82rem; letter-spacing:0.06em;
+      opacity:0; transition:opacity 0.3s ease, transform 0.3s ease;
+      pointer-events:none; z-index:999; max-width:80vw; text-align:center;
+      backdrop-filter:blur(8px);
+    `;
+    document.body.appendChild(toast);
+  }
+  toast.textContent = msg;
+  requestAnimationFrame(() => {
+    toast.style.opacity = "1";
+    toast.style.transform = "translateX(-50%) translateY(0)";
+  });
+  setTimeout(() => {
+    toast.style.opacity = "0";
+    toast.style.transform = "translateX(-50%) translateY(10px)";
+  }, 2200);
 };
 
 // ── 分享結果：產生視覺化診斷卡片（IG 限動尺寸 9:16） ────────
@@ -730,6 +754,13 @@ document.addEventListener("click", (event) => {
 document.addEventListener("click", (event) => {
   if (event.target.closest("#lineBooking")) {
     trackEvent("line_booking_click", { result_type: state.currentResult || "unknown" });
+    const result = state.currentResult ? results[state.currentResult] : null;
+    if (result && navigator.clipboard?.writeText) {
+      navigator.clipboard
+        .writeText(buildResultMessage(result))
+        .then(() => showCopyToast("已複製測驗結果，進入 LINE 後貼上傳送給芊光"))
+        .catch(() => {});
+    }
   }
 });
 

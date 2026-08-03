@@ -90,6 +90,22 @@ const makeupIntensityLevels = [
   },
 ];
 
+// ── 建議妝感對照表：由「你平常最常出現的妝感是？」×「你最重視什麼？」決定唯一一款 ──
+const intensityMatrix = {
+  幾乎素顏: { 自然耐看: "裸妝素顏款", 維持度: "裸妝素顏款", 放大效果: "日常自然款" },
+  乾淨淡妝: { 自然耐看: "日常自然款", 維持度: "日常自然款", 放大效果: "立體顯眼款" },
+  精緻眼妝: { 自然耐看: "日常自然款", 維持度: "立體顯眼款", 放大效果: "立體顯眼款" },
+  拍照妝感: { 自然耐看: "立體顯眼款", 維持度: "立體顯眼款", 放大效果: "濃郁存在款" },
+};
+
+const getIntensityLevel = () => {
+  const makeupAnswer = state.answerLog[3]; // Q4：你平常最常出現的妝感是？
+  const priorityAnswer = state.answerLog[4]; // Q5：你最重視什麼？
+  const name =
+    intensityMatrix[makeupAnswer?.label]?.[priorityAnswer?.label] || "日常自然款";
+  return makeupIntensityLevels.find((level) => level.name === name) || makeupIntensityLevels[1];
+};
+
 const results = {
   round: {
     name: "圓眼 · Airy Doll",
@@ -181,6 +197,7 @@ const state = {
   answerLog: [],
   currentResult: null,
   lastAnswerIndex: null,
+  currentIntensity: null,
 };
 
 const $ = (selector) => document.querySelector(selector);
@@ -205,6 +222,7 @@ const resetState = () => {
   state.answerLog = [];
   state.currentResult = null;
   state.lastAnswerIndex = null;
+  state.currentIntensity = null;
 };
 
 // ── GA4 ─────────────────────────────────────────
@@ -365,20 +383,18 @@ const renderResult = () => {
   $("#resultLength").textContent = result.length;
   $("#lineBooking").href = buildLineUrl(result);
 
-  // 妝感濃淡卡片（所有結果共用同一份分類）
+  // 建議妝感卡片（由 Q4 + Q5 決定唯一一款）
+  state.currentIntensity = getIntensityLevel();
   const intensityWrap = $("#resultIntensity");
   if (intensityWrap) {
-    intensityWrap.innerHTML = "";
-    makeupIntensityLevels.forEach((level) => {
-      const item = document.createElement("div");
-      item.className = "intensity-item";
-      item.innerHTML = `
+    const level = state.currentIntensity;
+    intensityWrap.innerHTML = `
+      <div class="intensity-item">
         <strong>${level.name}</strong>
         <p>${level.desc}</p>
         <span class="intensity-suited">適合：${level.suited}</span>
-      `;
-      intensityWrap.appendChild(item);
-    });
+      </div>
+    `;
   }
 
   // 日常保養提醒（精簡 3 點，所有結果共用）
@@ -568,6 +584,22 @@ const buildShareCard = async (result) => {
   ctx.fillStyle = "#2c2825";
   ctx.font = "600 44px 'Noto Serif TC', serif";
   ctx.fillText(result.length, pad, y);
+
+  const intensity = state.currentIntensity;
+  if (intensity) {
+    y += 90;
+    ctx.fillStyle = "#c9a876";
+    ctx.font = "600 26px 'Noto Serif TC', serif";
+    ctx.fillText("建議妝感", pad, y);
+    y += 54;
+    ctx.fillStyle = "#2c2825";
+    ctx.font = "600 40px 'Noto Serif TC', serif";
+    ctx.fillText(intensity.name, pad, y);
+    y += 42;
+    ctx.fillStyle = "#6f6258";
+    ctx.font = "300 28px 'Noto Serif TC', serif";
+    ctx.fillText(intensity.desc, pad, y);
+  }
 
   const ctaY = CARD_H - 240;
   ctx.strokeStyle = "rgba(44,40,37,0.15)";

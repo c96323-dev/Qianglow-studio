@@ -8,6 +8,16 @@
     <meta name="theme-color" content="#F8F4EE" />
     <meta property="og:title" content="芊光 Qianglow Studio 眼型測驗" />
     <meta property="og:description" content="6 題找出你的眼型與專屬睫毛設計。" />
+    <!-- ★ Google Analytics GA4 — 換成你自己的 Measurement ID -->
+    <!-- 格式：G-XXXXXXXXXX，到 analytics.google.com 取得後貼在這裡 -->
+    <!-- <script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-XXXXXXXXXX');
+    </script> -->
+    <!-- ★ 設定完後把上面的 comment 符號 (< !-- 和 -- >) 移除即可啟用 -->
     <link rel="icon" href="/favicon.ico" sizes="any">
     <link rel="icon" type="image/png" sizes="32x32" href="/favicon.png">
     <link rel="apple-touch-icon" href="/favicon.png">
@@ -107,21 +117,23 @@
           <h2 id="resultTitle"></h2>
           <p id="resultSummary"></p>
         </header>
+        <!-- 芊光小語（彩蛋） -->
+        <p id="resultEasterEgg" class="result-easter-egg"></p>
+
         <div class="result-layout">
           <section class="result-card analysis-card">
             <span class="card-index">01</span>
             <h3>眼型分析</h3>
             <p id="resultAnalysis"></p>
           </section>
-          <section class="result-card design-card">
+          <section class="result-card designs-card">
             <span class="card-index">02</span>
-            <h3>推薦睫毛設計</h3>
-            <p id="resultDesign"></p>
-            <dl class="spec-list">
-              <div><dt>Curl</dt><dd id="resultCurl"></dd></div>
-              <div><dt>長度</dt><dd id="resultLength"></dd></div>
-              <div><dt>粗細</dt><dd id="resultThickness"></dd></div>
-            </dl>
+            <h3>推薦設計</h3>
+            <div id="resultDesigns" class="designs-list"></div>
+            <div class="spec-row">
+              <span class="spec-label">建議長度</span>
+              <span id="resultLength" class="spec-value"></span>
+            </div>
           </section>
           <section class="result-card care-card">
             <span class="card-index">03</span>

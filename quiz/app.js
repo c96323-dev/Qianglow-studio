@@ -412,6 +412,40 @@ const drawCardEye = (ctx, cx, cy, w) => {
   ctx.restore();
 };
 
+// 分享卡片圖示：使用指定圖片，依短邊自動裁切成正方形（cover 模式，不變形）
+const SHARE_EYE_SRC = "assets/share-eye.png";
+let shareEyeImagePromise = null;
+const loadShareEyeImage = () => {
+  if (!shareEyeImagePromise) {
+    shareEyeImagePromise = new Promise((resolve, reject) => {
+      const img = new Image();
+      img.onload = () => resolve(img);
+      img.onerror = reject;
+      img.src = SHARE_EYE_SRC;
+    });
+  }
+  return shareEyeImagePromise;
+};
+
+const drawCardEyeImage = (ctx, img, cx, cy, size, radius = 32) => {
+  const srcSize = Math.min(img.naturalWidth, img.naturalHeight);
+  const sx = (img.naturalWidth - srcSize) / 2;
+  const sy = (img.naturalHeight - srcSize) / 2;
+  const x = cx - size / 2;
+  const y = cy - size / 2;
+  ctx.save();
+  ctx.beginPath();
+  ctx.moveTo(x + radius, y);
+  ctx.arcTo(x + size, y, x + size, y + size, radius);
+  ctx.arcTo(x + size, y + size, x, y + size, radius);
+  ctx.arcTo(x, y + size, x, y, radius);
+  ctx.arcTo(x, y, x + size, y, radius);
+  ctx.closePath();
+  ctx.clip();
+  ctx.drawImage(img, sx, sy, srcSize, srcSize, x, y, size, size);
+  ctx.restore();
+};
+
 const buildShareCard = async (result) => {
   await document.fonts.ready.catch(() => {});
   const canvas = document.createElement("canvas");
@@ -436,7 +470,12 @@ const buildShareCard = async (result) => {
   ctx.font = "300 30px 'Noto Serif TC', serif";
   ctx.fillText("芊光專屬眼型診斷", pad, 198);
 
-  drawCardEye(ctx, CARD_W / 2, 410, 520);
+  const eyeImg = await loadShareEyeImage().catch(() => null);
+  if (eyeImg) {
+    drawCardEyeImage(ctx, eyeImg, CARD_W / 2, 390, 360);
+  } else {
+    drawCardEye(ctx, CARD_W / 2, 410, 520);
+  }
 
   ctx.textAlign = "center";
   ctx.fillStyle = "#2c2825";
@@ -521,7 +560,7 @@ const openShareModal = (canvas, result) => {
   imgWrap.appendChild(img);
 
   const hint = document.createElement("p");
-  hint.textContent = "長按圖片即可儲存，分享到 IG 限動讓更多人看見妳的眼型分析";
+  hint.textContent = "長按圖片即可儲存";
   hint.style.cssText = `
     color:#fdf9f2; font-family:'Noto Serif TC',serif; font-size:0.85rem;
     letter-spacing:0.04em; text-align:center; max-width:320px; margin:0;

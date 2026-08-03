@@ -48,17 +48,6 @@ const questions = [
     ],
   },
   {
-    eyebrow: "Mood",
-    title: "你希望眼神呈現什麼感覺？",
-    hint: "這題會影響最後的推薦方向。",
-    answers: [
-      { label: "柔和無辜", note: "眼神乾淨、親和、有空氣感", effects: { round: 2 } },
-      { label: "清冷乾淨", note: "線條精緻、不過度甜美", effects: { monolid: 1, almond: 1 } },
-      { label: "消腫有神", note: "視覺上更輕、更俐落", effects: { puffy: 2 } },
-      { label: "溫柔上提", note: "改善疲憊感，眼尾更輕盈", effects: { downturned: 2 } },
-    ],
-  },
-  {
     eyebrow: "Priority",
     title: "你最重視什麼？",
     hint: "最後一題，讓建議更貼近日常。",
@@ -66,19 +55,39 @@ const questions = [
       { label: "自然耐看", note: "近看也像自己的睫毛", effects: { round: 1, monolid: 1 } },
       { label: "維持度", note: "希望掉落後仍然漂亮", effects: { puffy: 1, downturned: 1 } },
       { label: "放大效果", note: "想讓眼睛更有存在感", effects: { round: 1, almond: 1 } },
-      { label: "精品精緻感", note: "每一根線條都要乾淨細緻", effects: { almond: 2 } },
     ],
   },
 ];
 
-// ── 通用日常保養建議 ────────────────────────
-const generalCareTips = [
-  "避免揉眼睛",
-  "避免使用油性保養品",
+// ── 日常保養提醒（精簡 3 點，顯示於結果頁卡片下方）────────
+const careReminders = [
+  "B5強韌液可作為日常使用，幫助維持睫毛健康感與持久度",
   "每天輕柔清潔睫毛根部，避免油脂與灰塵堆積導致黏著力下降",
-  "洗臉後用睫毛刷輕輕梳理，讓睫毛保持順整",
-  "B5強韌液可作為日常使用，幫助維持睫毛健康感",
   "避免趴睡或長時間側壓到睫毛的睡姿",
+];
+
+// ── 妝感濃淡分類（顯示於結果頁 03 卡片，所有結果共用）────────
+const makeupIntensityLevels = [
+  {
+    name: "裸妝素顏款",
+    desc: "自然日常款，輕盈裸感，幾乎看不出有接睫毛。",
+    suited: "第一次接睫毛、平常少化妝、不想被看出有接睫毛的人",
+  },
+  {
+    name: "日常自然款",
+    desc: "清透微妝感，放大眼型同時保有自然度。",
+    suited: "上班通勤、素顏也想看起來有精神的人",
+  },
+  {
+    name: "立體顯眼款",
+    desc: "眼神更明亮有神，修飾眼型效果明顯，約會感提升。",
+    suited: "想放大眼神但不想太濃妝感的人",
+  },
+  {
+    name: "濃郁存在款",
+    desc: "深邃濃密，帶有完整眼妝感，眼神存在感更強烈。",
+    suited: "喜歡明顯睫毛感與妝感的人",
+  },
 ];
 
 const results = {
@@ -99,7 +108,6 @@ const results = {
       },
     ],
     length: "8–11 mm",
-    care: generalCareTips,
   },
   monolid: {
     name: "單眼皮 · Clean Lift",
@@ -113,7 +121,6 @@ const results = {
       },
     ],
     length: "9–12 mm",
-    care: generalCareTips,
   },
   puffy: {
     name: "泡泡眼 · Soft Define",
@@ -127,7 +134,6 @@ const results = {
       },
     ],
     length: "8–11 mm",
-    care: generalCareTips,
   },
   downturned: {
     name: "下垂眼 · Gentle Lift",
@@ -146,7 +152,6 @@ const results = {
       },
     ],
     length: "8–11 mm",
-    care: "洗臉後將眼尾睫毛往外上方梳開，避免眼尾交疊造成下壓感。",
   },
   almond: {
     name: "丹鳳眼 · Silky Line",
@@ -160,13 +165,12 @@ const results = {
       },
     ],
     length: "9–12 mm",
-    care: "避免用睫毛夾破壞嫁接弧度，眼尾每日輕刷保持線條方向一致。",
   },
 };
 
 // ── 選題後的即時回饋文字 ────────────────────────
 const feedbacks = [
-  ["了解妳的眼型輪廓", "記錄妳的睫毛狀態", "鎖定妳的改善方向", "分析妳的日常妝感", "掌握妳想要的眼神", "完成診斷"],
+  ["了解妳的眼型輪廓", "記錄妳的睫毛狀態", "鎖定妳的改善方向", "分析妳的日常妝感", "完成診斷"],
   ["圓眼有天生的放大感✨", "單眼皮最需要的是捲度", "泡泡眼關鍵在輕盈承重", "下垂眼要從眼中段提起", "丹鳳眼讓線條更柔和", "正在分析中"],
 ];
 
@@ -174,6 +178,7 @@ const state = {
   currentQuestion: 0,
   scores: {},
   answers: [],
+  answerLog: [],
   currentResult: null,
   lastAnswerIndex: null,
 };
@@ -197,6 +202,7 @@ const resetState = () => {
   state.currentQuestion = 0;
   state.scores = { round: 0, monolid: 0, puffy: 0, downturned: 0, almond: 0 };
   state.answers = [];
+  state.answerLog = [];
   state.currentResult = null;
   state.lastAnswerIndex = null;
 };
@@ -261,6 +267,7 @@ const renderQuestion = () => {
   $("#stepLabel").textContent = `Question ${state.currentQuestion + 1}`;
   $("#stepCount").textContent = `${state.currentQuestion + 1} / ${questions.length}`;
   $("#progressBar").style.width = `${progress}%`;
+  $("#quizBackBtn").textContent = state.currentQuestion === 0 ? "返回" : "上一題";
   $("#questionEyebrow").textContent = question.eyebrow;
   $("#questionTitle").textContent = question.title;
   $("#questionHint").textContent = question.hint;
@@ -282,14 +289,27 @@ const renderQuestion = () => {
   });
 };
 
-const chooseAnswer = (answer, answerIndex) => {
-  state.answers.push(answer.label);
-  state.lastAnswerIndex = answerIndex;
-
+const applyAnswerScore = (answer) => {
   if (answer.result) state.scores[answer.result] += 4;
   Object.entries(answer.effects || {}).forEach(([key, value]) => {
     state.scores[key] += value;
   });
+};
+
+const revertAnswerScore = (answer) => {
+  if (!answer) return;
+  if (answer.result) state.scores[answer.result] -= 4;
+  Object.entries(answer.effects || {}).forEach(([key, value]) => {
+    state.scores[key] -= value;
+  });
+};
+
+const chooseAnswer = (answer, answerIndex) => {
+  state.answers.push(answer.label);
+  state.answerLog[state.currentQuestion] = answer;
+  state.lastAnswerIndex = answerIndex;
+
+  applyAnswerScore(answer);
 
   showFeedback(state.currentQuestion, answerIndex);
 
@@ -300,6 +320,21 @@ const chooseAnswer = (answer, answerIndex) => {
   }
 
   setTimeout(showLoading, 400);
+};
+
+const goToPreviousQuestion = () => {
+  if (state.currentQuestion === 0) {
+    showScreen("home");
+    return;
+  }
+  state.currentQuestion -= 1;
+  const prevAnswer = state.answerLog[state.currentQuestion];
+  if (prevAnswer) {
+    revertAnswerScore(prevAnswer);
+    state.answerLog[state.currentQuestion] = null;
+    state.answers.pop();
+  }
+  renderQuestion();
 };
 
 const showLoading = () => {
@@ -328,9 +363,26 @@ const renderResult = () => {
   $("#resultSummary").textContent = result.summary;
   $("#resultAnalysis").textContent = result.analysis;
   $("#resultLength").textContent = result.length;
-  const careItems = Array.isArray(result.care) ? result.care : [result.care];
-  $("#resultCare").innerHTML = careItems.map((item) => `<li>${item}</li>`).join("");
   $("#lineBooking").href = buildLineUrl(result);
+
+  // 妝感濃淡卡片（所有結果共用同一份分類）
+  const intensityWrap = $("#resultIntensity");
+  if (intensityWrap) {
+    intensityWrap.innerHTML = "";
+    makeupIntensityLevels.forEach((level) => {
+      const item = document.createElement("div");
+      item.className = "intensity-item";
+      item.innerHTML = `
+        <strong>${level.name}</strong>
+        <p>${level.desc}</p>
+        <span class="intensity-suited">適合：${level.suited}</span>
+      `;
+      intensityWrap.appendChild(item);
+    });
+  }
+
+  // 日常保養提醒（精簡 3 點，所有結果共用）
+  $("#careReminder").innerHTML = careReminders.map((item) => `<li>${item}</li>`).join("");
 
   // 推薦設計卡片
   const designWrap = $("#resultDesigns");
@@ -637,7 +689,7 @@ document.addEventListener("click", (event) => {
   const action = event.target.closest("[data-action]")?.dataset.action;
   if (!action) return;
   if (action === "start") startQuiz();
-  if (action === "back-home") showScreen("home");
+  if (action === "quiz-back") goToPreviousQuestion();
   if (action === "restart") startQuiz();
   if (action === "share" || action === "share-result") share();
   if (action === "scroll-knowledge") $("#knowledge").scrollIntoView({ behavior: "smooth", block: "start" });

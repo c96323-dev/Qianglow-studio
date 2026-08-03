@@ -7,7 +7,7 @@
     <meta name="description" content="芊光 Qianglow Studio 互動式眼型測驗，提供專屬睫毛設計建議與 LINE 預約入口。" />
     <meta name="theme-color" content="#F8F4EE" />
     <meta property="og:title" content="芊光 Qianglow Studio 眼型測驗" />
-    <meta property="og:description" content="6 題找出你的眼型與專屬睫毛設計。" />
+    <meta property="og:description" content="5 題找出你的眼型與專屬睫毛設計。" />
     <!-- ★ Google Analytics GA4 — 換成你自己的 Measurement ID -->
     <!-- 格式：G-XXXXXXXXXX，到 analytics.google.com 取得後貼在這裡 -->
     <!-- <script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"></script>
@@ -44,9 +44,9 @@
         </header>
         <div class="hero-grid">
           <div class="hero-copy">
-            <p class="kicker">6 questions · 90 seconds</p>
+            <p class="kicker">5 questions · 90 seconds</p>
             <h1 id="home-title">找到最適合<br />你眼型的<br />睫毛設計</h1>
-            <p class="intro">芊光會為你分析。</p>
+            <p class="intro">芊光會為你分析</p>
             <div class="hero-actions">
               <button class="primary-button" type="button" data-action="start">開始測驗</button>
               <button class="text-button" type="button" data-action="scroll-knowledge">先看小知識</button>
@@ -68,7 +68,7 @@
           </article>
           <article>
             <span>02</span>
-            <h2>原生睫毛決定承重</h2>
+            <h2>真睫毛的條件決定支撐力</h2>
             <p>細軟、易垂或稀疏睫毛，需要更細緻的粗細與翹度配置。</p>
           </article>
           <article>
@@ -81,11 +81,11 @@
 
       <section class="screen screen-quiz" data-screen="quiz" aria-live="polite">
         <header class="quiz-header">
-          <button class="ghost-button" type="button" data-action="back-home">返回</button>
+          <button id="quizBackBtn" class="ghost-button" type="button" data-action="quiz-back">返回</button>
           <div class="progress-shell" aria-label="測驗進度">
             <div class="progress-meta">
               <span id="stepLabel">Question 1</span>
-              <span id="stepCount">1 / 6</span>
+              <span id="stepCount">1 / 5</span>
             </div>
             <div class="progress-track">
               <div id="progressBar" class="progress-bar"></div>
@@ -135,12 +135,16 @@
               <span id="resultLength" class="spec-value"></span>
             </div>
           </section>
-          <section class="result-card care-card">
+          <section class="result-card intensity-card">
             <span class="card-index">03</span>
-            <h3>保養建議</h3>
-            <ul id="resultCare" class="care-list"></ul>
+            <h3>妝感濃淡</h3>
+            <div id="resultIntensity" class="intensity-list"></div>
           </section>
         </div>
+        <section class="care-reminder" aria-label="日常保養提醒">
+          <p class="eyebrow">Aftercare</p>
+          <ul id="careReminder" class="care-reminder-list"></ul>
+        </section>
         <section class="booking-panel" aria-label="LINE 預約">
           <div>
             <p class="eyebrow">Reservation</p>

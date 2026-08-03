@@ -98,7 +98,7 @@ img { display: block; max-width: 100%; }
 }
 
 .hero-copy { max-width: 560px; }
-.hero-copy h1 { margin: 16px 0 18px; font-size: 6.2rem; font-weight: 600; line-height: 0.94; letter-spacing: 0; }
+.hero-copy h1 { margin: 16px 0 18px; font-size: 5.4rem; font-weight: 600; line-height: 1.04; letter-spacing: 0; }
 .intro { max-width: 34rem; margin: 0; color: var(--brown-soft); font-size: 1.12rem; line-height: 2; }
 .hero-actions, .booking-actions { display: flex; flex-wrap: wrap; gap: 14px; align-items: center; margin-top: 30px; }
 
@@ -178,7 +178,7 @@ img { display: block; max-width: 100%; }
 
 .screen-result { padding-bottom: 34px; }
 .result-hero { padding: clamp(28px,7vw,70px) 0 28px; }
-.result-hero h2 { margin: 12px 0; font-size: 5.8rem; font-weight: 600; line-height: 0.98; letter-spacing: 0; }
+.result-hero h2 { margin: 12px 0; font-size: 4.8rem; font-weight: 600; line-height: 1.08; letter-spacing: 0; }
 .result-hero p:not(.eyebrow) { max-width: 660px; margin: 0; color: var(--brown-soft); font-size: 1.08rem; line-height: 1.9; }
 
 .result-layout { display: grid; grid-template-columns: repeat(3,1fr); gap: 1px; overflow: hidden; border: 1px solid var(--line); border-radius: 8px; background: var(--line); }
@@ -281,7 +281,7 @@ img { display: block; max-width: 100%; }
   .screen { padding: 18px; }
   .hero-grid, .result-layout, .knowledge-strip { grid-template-columns: 1fr; }
   .hero-grid { gap: 24px; min-height: auto; padding-top: 44px; }
-  .hero-copy h1 { max-width: 8ch; font-size: 4.9rem; }
+  .hero-copy h1 { max-width: 8ch; font-size: 4.2rem; }
   .hero-visual { min-height: 360px; }
   .knowledge-strip { margin-top: 28px; }
   .answer-grid { grid-template-columns: 1fr; }
@@ -289,7 +289,7 @@ img { display: block; max-width: 100%; }
   .booking-panel { align-items: flex-start; flex-direction: column; }
   .question-panel h2 { font-size: 3.7rem; }
   .loading-card h2 { font-size: 3.25rem; }
-  .result-hero h2 { font-size: 4.3rem; }
+  .result-hero h2 { font-size: 3.6rem; }
 }
 
 @media (max-width: 560px) {
@@ -302,11 +302,11 @@ img { display: block; max-width: 100%; }
   .progress-shell { width: 100%; }
   .question-panel h2, .result-hero h2, .loading-card h2 { word-break: keep-all; overflow-wrap: anywhere; }
   .answer-button { min-height: 96px; }
-  .hero-copy h1 { max-width: 9ch; font-size: 4.35rem; line-height: 0.98; }
+  .hero-copy h1 { max-width: 9ch; font-size: 3.5rem; line-height: 1.12; }
   .intro, .knowledge-strip p, .result-card p, .booking-panel p, .question-hint, .care-list { font-size: 0.96rem; }
   .knowledge-strip h2, .result-card h3, .booking-panel h3 { font-size: 1.36rem; }
   .question-panel h2 { font-size: 3.05rem; }
   .answer-button strong { font-size: 1.28rem; }
   .loading-card h2 { font-size: 2.72rem; }
-  .result-hero h2 { font-size: 3.5rem; }
+  .result-hero h2 { font-size: 2.85rem; }
 }

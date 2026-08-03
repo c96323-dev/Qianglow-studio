@@ -128,8 +128,10 @@ img { display: block; max-width: 100%; }
 }
 .knowledge-strip article { min-height: 172px; padding: 24px; background: rgba(255,252,247,0.66); }
 .knowledge-strip span, .card-index { font-family: "Cormorant Garamond", serif; font-size: 1.1rem; color: var(--gold); }
-.knowledge-strip h2, .result-card h3, .work-section h3, .booking-panel h3 { margin: 10px 0; font-size: 1.55rem; font-weight: 600; line-height: 1.28; }
+.knowledge-strip h2, .result-card h3, .booking-panel h3 { margin: 10px 0; font-size: 1.55rem; font-weight: 600; line-height: 1.28; }
 .knowledge-strip p, .result-card p, .booking-panel p, .question-hint { margin: 0; color: var(--brown-soft); line-height: 1.85; }
+.care-list { margin: 0; padding-left: 1.2em; display: grid; gap: 8px; color: var(--brown-soft); font-size: 0.98rem; line-height: 1.65; }
+.care-list li { padding-left: 2px; }
 
 .ambient { position: absolute; pointer-events: none; filter: blur(1px); }
 .ambient-one { top: 18%; left: -6vw; width: 34vw; height: 34vw; border: 1px solid rgba(201,168,118,0.3); border-radius: 50%; opacity: 0.52; }
@@ -185,19 +187,6 @@ img { display: block; max-width: 100%; }
 .spec-list div { display: flex; justify-content: space-between; gap: 14px; padding-top: 10px; border-top: 1px solid var(--line); }
 .spec-list dt { color: var(--gold); font-family: "Cormorant Garamond", serif; font-weight: 700; }
 .spec-list dd { margin: 0; color: var(--brown); text-align: right; }
-
-.work-section { padding: clamp(42px,7vw,74px) 0 26px; }
-.section-heading { margin-bottom: 22px; }
-.case-carousel { display: grid; grid-template-columns: repeat(3,minmax(0,1fr)); gap: 14px; }
-.case-card { overflow: hidden; border: 1px solid var(--line); border-radius: 8px; background: rgba(255,252,247,0.7); }
-.case-image { display: grid; min-height: 210px; place-items: center; background: radial-gradient(circle at 58% 45%, rgba(44,40,37,0.2), transparent 4%), radial-gradient(ellipse at 50% 54%, rgba(44,40,37,0.1), transparent 21%), linear-gradient(135deg, rgba(201,168,118,0.28), rgba(142,156,135,0.16), rgba(201,141,133,0.18)); }
-.case-eye { position: relative; width: 68%; max-width: 210px; aspect-ratio: 2.3/1; border-top: 3px solid rgba(44,40,37,0.68); border-bottom: 1px solid rgba(44,40,37,0.18); border-radius: 999px; }
-.case-eye::before, .case-eye::after { position: absolute; top: -10px; width: 1px; height: 24px; content: ""; background: rgba(44,40,37,0.56); border-radius: 999px; box-shadow: 22px -2px 0 rgba(44,40,37,0.5), 44px 1px 0 rgba(44,40,37,0.46), 66px -1px 0 rgba(44,40,37,0.36), 88px 2px 0 rgba(44,40,37,0.32); }
-.case-eye::before { left: 20%; transform: rotate(-16deg); }
-.case-eye::after { right: 26%; transform: rotate(16deg); }
-.case-card figcaption { padding: 18px; }
-.case-card strong { display: block; margin-bottom: 8px; font-size: 1.05rem; }
-.case-card span { color: var(--brown-soft); font-size: 0.92rem; line-height: 1.6; }
 
 .booking-panel { display: flex; justify-content: space-between; gap: 28px; align-items: center; padding: clamp(24px,5vw,34px); border: 1px solid rgba(201,168,118,0.42); border-radius: 8px; background: linear-gradient(120deg, rgba(255,252,247,0.9), rgba(233,215,184,0.36)), rgba(255,252,247,0.68); }
 .booking-panel h3 { max-width: 520px; }
@@ -290,7 +279,7 @@ img { display: block; max-width: 100%; }
 
 @media (max-width: 860px) {
   .screen { padding: 18px; }
-  .hero-grid, .result-layout, .case-carousel, .knowledge-strip { grid-template-columns: 1fr; }
+  .hero-grid, .result-layout, .knowledge-strip { grid-template-columns: 1fr; }
   .hero-grid { gap: 24px; min-height: auto; padding-top: 44px; }
   .hero-copy h1 { max-width: 8ch; font-size: 4.9rem; }
   .hero-visual { min-height: 360px; }
@@ -314,8 +303,8 @@ img { display: block; max-width: 100%; }
   .question-panel h2, .result-hero h2, .loading-card h2 { word-break: keep-all; overflow-wrap: anywhere; }
   .answer-button { min-height: 96px; }
   .hero-copy h1 { max-width: 9ch; font-size: 4.35rem; line-height: 0.98; }
-  .intro, .knowledge-strip p, .result-card p, .booking-panel p, .question-hint { font-size: 0.96rem; }
-  .knowledge-strip h2, .result-card h3, .work-section h3, .booking-panel h3 { font-size: 1.36rem; }
+  .intro, .knowledge-strip p, .result-card p, .booking-panel p, .question-hint, .care-list { font-size: 0.96rem; }
+  .knowledge-strip h2, .result-card h3, .booking-panel h3 { font-size: 1.36rem; }
   .question-panel h2 { font-size: 3.05rem; }
   .answer-button strong { font-size: 1.28rem; }
   .loading-card h2 { font-size: 2.72rem; }

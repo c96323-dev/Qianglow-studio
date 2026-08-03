@@ -71,6 +71,16 @@ const questions = [
   },
 ];
 
+// ── 通用日常保養建議 ────────────────────────
+const generalCareTips = [
+  "避免揉眼睛",
+  "避免使用油性保養品",
+  "每天輕柔清潔睫毛根部，避免油脂與灰塵堆積導致黏著力下降",
+  "洗臉後用睫毛刷輕輕梳理，讓睫毛保持順整",
+  "B5強韌液可作為日常使用，幫助維持睫毛健康感",
+  "避免趴睡或長時間側壓到睫毛的睡姿",
+];
+
 const results = {
   round: {
     name: "圓眼 · Airy Doll",
@@ -89,7 +99,7 @@ const results = {
       },
     ],
     length: "8–11 mm",
-    care: "避免揉眼與厚重眼線。卸妝時用棉棒順向清潔根部，讓中段線條維持乾淨。",
+    care: generalCareTips,
   },
   monolid: {
     name: "單眼皮 · Clean Lift",
@@ -103,7 +113,7 @@ const results = {
       },
     ],
     length: "9–12 mm",
-    care: "睡前用睫毛刷整理方向，避免眼皮產品堆在根部，維持翹度與乾淨度。",
+    care: generalCareTips,
   },
   puffy: {
     name: "泡泡眼 · Soft Define",
@@ -117,7 +127,7 @@ const results = {
       },
     ],
     length: "8–11 mm",
-    care: "前三天避免油類眼霜靠近根部。早上若眼皮浮腫，可先冷敷再輕刷睫毛方向。",
+    care: generalCareTips,
   },
   downturned: {
     name: "下垂眼 · Gentle Lift",
@@ -318,7 +328,8 @@ const renderResult = () => {
   $("#resultSummary").textContent = result.summary;
   $("#resultAnalysis").textContent = result.analysis;
   $("#resultLength").textContent = result.length;
-  $("#resultCare").textContent = result.care;
+  const careItems = Array.isArray(result.care) ? result.care : [result.care];
+  $("#resultCare").innerHTML = careItems.map((item) => `<li>${item}</li>`).join("");
   $("#lineBooking").href = buildLineUrl(result);
 
   // 推薦設計卡片
@@ -358,20 +369,224 @@ const buildLineUrl = (result) => {
   return `https://line.me/R/msg/text/?${message}`;
 };
 
-const sharePayload = () => {
-  const result = state.currentResult ? results[state.currentResult] : null;
-  const title = result ? `我的芊光眼型：${result.name}` : "芊光 Qianglow Studio 眼型測驗";
-  const text = result ? result.summary : "6 題找出妳的眼型與專屬睫毛設計。";
-  return { title, text, url: window.location.href };
+// ── 分享結果：產生視覺化診斷卡片（IG 限動尺寸 9:16） ────────
+const CARD_W = 1080;
+const CARD_H = 1920;
+
+const wrapCanvasText = (ctx, text, x, y, maxWidth, lineHeight) => {
+  let line = "";
+  let cy = y;
+  for (const char of text) {
+    const test = line + char;
+    if (ctx.measureText(test).width > maxWidth && line) {
+      ctx.fillText(line, x, cy);
+      line = char;
+      cy += lineHeight;
+    } else {
+      line = test;
+    }
+  }
+  if (line) ctx.fillText(line, x, cy);
+  return cy;
+};
+
+const drawCardEye = (ctx, cx, cy, w) => {
+  const h = w * 0.42;
+  ctx.save();
+  ctx.strokeStyle = "#c9a876";
+  ctx.lineWidth = 4;
+  ctx.beginPath();
+  ctx.moveTo(cx - w / 2, cy);
+  ctx.bezierCurveTo(cx - w / 4, cy - h, cx + w / 4, cy - h, cx + w / 2, cy);
+  ctx.bezierCurveTo(cx + w / 4, cy + h, cx - w / 4, cy + h, cx - w / 2, cy);
+  ctx.closePath();
+  ctx.stroke();
+  ctx.fillStyle = "#8e9c87";
+  ctx.beginPath();
+  ctx.arc(cx, cy, w * 0.11, 0, Math.PI * 2);
+  ctx.fill();
+  ctx.fillStyle = "#2c2825";
+  ctx.beginPath();
+  ctx.arc(cx, cy, w * 0.05, 0, Math.PI * 2);
+  ctx.fill();
+  ctx.restore();
+};
+
+const buildShareCard = async (result) => {
+  await document.fonts.ready.catch(() => {});
+  const canvas = document.createElement("canvas");
+  canvas.width = CARD_W;
+  canvas.height = CARD_H;
+  const ctx = canvas.getContext("2d");
+  const pad = 96;
+
+  const bg = ctx.createLinearGradient(0, 0, CARD_W, CARD_H);
+  bg.addColorStop(0, "#fffcf7");
+  bg.addColorStop(0.55, "#f8f4ee");
+  bg.addColorStop(1, "#efe5d8");
+  ctx.fillStyle = bg;
+  ctx.fillRect(0, 0, CARD_W, CARD_H);
+
+  ctx.textAlign = "left";
+  ctx.fillStyle = "#c9a876";
+  ctx.font = "600 26px 'Noto Serif TC', serif";
+  ctx.fillText("Q I A N G L O W   S T U D I O", pad, 150);
+
+  ctx.fillStyle = "#6f6258";
+  ctx.font = "300 30px 'Noto Serif TC', serif";
+  ctx.fillText("芊光專屬眼型診斷", pad, 198);
+
+  drawCardEye(ctx, CARD_W / 2, 410, 520);
+
+  ctx.textAlign = "center";
+  ctx.fillStyle = "#2c2825";
+  ctx.font = "600 74px 'Noto Serif TC', serif";
+  ctx.fillText(result.name, CARD_W / 2, 650);
+
+  ctx.strokeStyle = "#c9a876";
+  ctx.lineWidth = 2;
+  ctx.beginPath();
+  ctx.moveTo(CARD_W / 2 - 60, 690);
+  ctx.lineTo(CARD_W / 2 + 60, 690);
+  ctx.stroke();
+
+  ctx.textAlign = "left";
+  ctx.fillStyle = "#6f6258";
+  ctx.font = "300 34px 'Noto Serif TC', serif";
+  let y = wrapCanvasText(ctx, result.summary, pad, 770, CARD_W - pad * 2, 54) + 76;
+
+  ctx.fillStyle = "#c9a876";
+  ctx.font = "600 26px 'Noto Serif TC', serif";
+  ctx.fillText("推薦設計", pad, y);
+  result.designs.forEach((d) => {
+    y += 64;
+    ctx.fillStyle = "#2c2825";
+    ctx.font = "600 40px 'Noto Serif TC', serif";
+    ctx.fillText(`・${d.name}`, pad, y);
+    y += 42;
+    ctx.fillStyle = "#8e9c87";
+    ctx.font = "400 26px 'Noto Serif TC', serif";
+    ctx.fillText(d.mood, pad + 30, y);
+  });
+
+  y += 90;
+  ctx.fillStyle = "#c9a876";
+  ctx.font = "600 26px 'Noto Serif TC', serif";
+  ctx.fillText("建議長度", pad, y);
+  y += 54;
+  ctx.fillStyle = "#2c2825";
+  ctx.font = "600 44px 'Noto Serif TC', serif";
+  ctx.fillText(result.length, pad, y);
+
+  const ctaY = CARD_H - 240;
+  ctx.strokeStyle = "rgba(44,40,37,0.15)";
+  ctx.lineWidth = 1;
+  ctx.beginPath();
+  ctx.moveTo(pad, ctaY);
+  ctx.lineTo(CARD_W - pad, ctaY);
+  ctx.stroke();
+
+  ctx.textAlign = "center";
+  ctx.fillStyle = "#2c2825";
+  ctx.font = "300 32px 'Noto Serif TC', serif";
+  ctx.fillText("找到最適合妳眼型的睫毛設計", CARD_W / 2, ctaY + 78);
+  ctx.fillStyle = "#c9a876";
+  ctx.font = "600 30px 'Noto Serif TC', serif";
+  ctx.fillText("qianglow.com/quiz", CARD_W / 2, ctaY + 128);
+
+  return canvas;
+};
+
+const openShareModal = (canvas, result) => {
+  $("#shareModal")?.remove();
+
+  const modal = document.createElement("div");
+  modal.id = "shareModal";
+  modal.style.cssText = `
+    position:fixed; inset:0; z-index:1000;
+    display:flex; flex-direction:column; align-items:center; justify-content:center;
+    gap:20px; padding:28px;
+    background:rgba(44,40,37,0.72); backdrop-filter:blur(8px);
+  `;
+
+  const imgWrap = document.createElement("div");
+  imgWrap.style.cssText = `
+    width:min(76vw,320px); aspect-ratio:${CARD_W}/${CARD_H};
+    border-radius:14px; overflow:hidden; box-shadow:0 24px 60px rgba(0,0,0,0.35);
+  `;
+  const img = document.createElement("img");
+  img.src = canvas.toDataURL("image/png");
+  img.alt = `芊光眼型診斷卡片：${result.name}`;
+  img.style.cssText = "width:100%; height:100%; display:block; object-fit:cover;";
+  imgWrap.appendChild(img);
+
+  const hint = document.createElement("p");
+  hint.textContent = "長按圖片即可儲存，分享到 IG 限動讓更多人看見妳的眼型分析";
+  hint.style.cssText = `
+    color:#fdf9f2; font-family:'Noto Serif TC',serif; font-size:0.85rem;
+    letter-spacing:0.04em; text-align:center; max-width:320px; margin:0;
+  `;
+
+  const actions = document.createElement("div");
+  actions.style.cssText = "display:flex; gap:12px; flex-wrap:wrap; justify-content:center;";
+
+  const makeBtn = (label, primary) => {
+    const btn = document.createElement("button");
+    btn.type = "button";
+    btn.textContent = label;
+    btn.style.cssText = `
+      font-family:'Noto Serif TC',serif; font-size:0.88rem; letter-spacing:0.08em;
+      padding:12px 26px; border-radius:999px; cursor:pointer;
+      border:1px solid ${primary ? "transparent" : "rgba(255,252,247,0.5)"};
+      background:${primary ? "#c9a876" : "transparent"};
+      color:${primary ? "#2c2825" : "#fdf9f2"};
+    `;
+    return btn;
+  };
+
+  const downloadBtn = makeBtn("儲存圖片", true);
+  downloadBtn.addEventListener("click", () => {
+    const a = document.createElement("a");
+    a.href = canvas.toDataURL("image/png");
+    a.download = `qianglow-${state.currentResult || "result"}.png`;
+    a.click();
+    trackEvent("share_card_download", { result_type: state.currentResult || "unknown" });
+  });
+  actions.appendChild(downloadBtn);
+
+  if (navigator.canShare) {
+    const nativeBtn = makeBtn("分享", false);
+    nativeBtn.addEventListener("click", () => {
+      canvas.toBlob(async (blob) => {
+        if (!blob) return;
+        const file = new File([blob], "qianglow-result.png", { type: "image/png" });
+        if (!navigator.canShare({ files: [file] })) return;
+        await navigator
+          .share({ files: [file], title: `我的芊光眼型：${result.name}`, text: result.summary })
+          .catch(() => {});
+        trackEvent("share_card_native", { result_type: state.currentResult || "unknown" });
+      }, "image/png");
+    });
+    actions.appendChild(nativeBtn);
+  }
+
+  const closeBtn = makeBtn("關閉", false);
+  closeBtn.addEventListener("click", () => modal.remove());
+  actions.appendChild(closeBtn);
+
+  modal.append(imgWrap, hint, actions);
+  modal.addEventListener("click", (event) => {
+    if (event.target === modal) modal.remove();
+  });
+  document.body.appendChild(modal);
 };
 
 const share = async () => {
-  const payload = sharePayload();
-  if (navigator.share) {
-    await navigator.share(payload).catch(() => {});
-    return;
-  }
-  await navigator.clipboard?.writeText(`${payload.title}\n${payload.text}\n${payload.url}`).catch(() => {});
+  const result = state.currentResult ? results[state.currentResult] : null;
+  if (!result) return;
+  trackEvent("share_result_click", { result_type: state.currentResult });
+  const canvas = await buildShareCard(result);
+  openShareModal(canvas, result);
 };
 
 const initLiff = async () => {

@@ -1,4 +1,4 @@
-const LINE_BOOKING_URL = "https://lin.ee/Pa0mkmD";
+const LINE_BOOKING_URL = "https://lin.ee/rspH0C2";
 const LIFF_ID = "";
 
 const questions = [
@@ -10,7 +10,7 @@ const questions = [
       { label: "圓眼", note: "眼睛偏大、眼中高度明顯", result: "round" },
       { label: "單眼皮", note: "眼摺不明顯，線條乾淨", result: "monolid" },
       { label: "泡泡眼", note: "眼皮較有厚度或浮腫感", result: "puffy" },
-      { label: "下垂眼", note: "眼尾自然往下，眼神柔和", result: "downturned" },
+      { label: "三角眼", note: "眼尾自然往下，眼神柔和", result: "downturned" },
       { label: "丹鳳眼", note: "眼型細長，眼尾帶一點上揚", result: "almond" },
     ],
   },
@@ -57,13 +57,6 @@ const questions = [
       { label: "放大效果", note: "想讓眼睛更有存在感", effects: { round: 1, almond: 1 } },
     ],
   },
-];
-
-// ── 日常保養提醒（精簡 3 點，顯示於結果頁卡片下方）────────
-const careReminders = [
-  "B5強韌液可作為日常使用，幫助維持睫毛健康感與持久度",
-  "每天輕柔清潔睫毛根部，避免油脂與灰塵堆積導致黏著力下降",
-  "避免趴睡或長時間側壓到睫毛的睡姿",
 ];
 
 // ── 妝感濃淡分類（顯示於結果頁 03 卡片，所有結果共用）────────
@@ -152,9 +145,9 @@ const results = {
     length: "8–11 mm",
   },
   downturned: {
-    name: "下垂眼 · Gentle Lift",
+    name: "三角眼 · Gentle Lift",
     summary: "妳的眼型自帶溫柔感，芊光的方向是不刻意、不誇張，讓眼神輕輕往上提。",
-    analysis: "下垂眼不建議把眼尾拉得太長太重，否則會更顯疲態。重心應放在眼中段，讓線條自然往上走。眼尾加長型需避免。",
+    analysis: "三角眼不建議把眼尾拉得太長太重，否則會更顯疲態。重心應放在眼中段，讓線條自然往上走。眼尾加長型需避免。",
     designs: [
       {
         name: "眼中加長型",
@@ -184,10 +177,47 @@ const results = {
   },
 };
 
+// ── 人設命名系統：眼型 × 建議妝感 → 唯一一組人設名稱＋金句 ──────
+const personas = {
+  round: {
+    裸妝素顏款: { nameCn: "雲朵絮語", nameEn: "Cloud Whisper", quote: "妳的溫柔不用刻意，靠近就能感覺到。" },
+    日常自然款: { nameCn: "晨光初醒", nameEn: "Morning Bloom", quote: "不用刻意討好誰，妳的溫柔本來就很有殺傷力。" },
+    立體顯眼款: { nameCn: "焰色晨光", nameEn: "Ember Dawn", quote: "安靜的時候像鄰家女孩，笑起來全場都看妳。" },
+    濃郁存在款: { nameCn: "薔薇微光", nameEn: "Rosé Glow", quote: "看起來甜，骨子裡其實很有主見。" },
+  },
+  monolid: {
+    裸妝素顏款: { nameCn: "霧落無聲", nameEn: "Silent Mist", quote: "妳從不多說，但每句話都算數。" },
+    日常自然款: { nameCn: "淺灰晨曦", nameEn: "Grey Dawn", quote: "妳的好，要相處久了才懂。" },
+    立體顯眼款: { nameCn: "靜谷微風", nameEn: "Quiet Breeze", quote: "妳看起來很有距離，其實比誰都溫柔。" },
+    濃郁存在款: { nameCn: "深夜星圖", nameEn: "Night Chart", quote: "妳從不需要誰的認同，自己就是一種標準。" },
+  },
+  puffy: {
+    裸妝素顏款: { nameCn: "白瓷初雪", nameEn: "Powder Snow", quote: "妳天生自帶少女感，連生氣都讓人覺得可愛。" },
+    日常自然款: { nameCn: "晨露輕語", nameEn: "Dew Whisper", quote: "妳看起來人畜無害，其實心裡什麼都清楚。" },
+    立體顯眼款: { nameCn: "粉櫻微光", nameEn: "Petal Glow", quote: "別被妳的軟萌騙了，妳其實很有主見。" },
+    濃郁存在款: { nameCn: "緋色暮光", nameEn: "Crimson Dusk", quote: "妳的可愛底下，藏著意想不到的堅強。" },
+  },
+  downturned: {
+    裸妝素顏款: { nameCn: "微風輕拂", nameEn: "Soft Breeze", quote: "妳讓人卸下防備，是那種待著就安心的存在。" },
+    日常自然款: { nameCn: "暖陽低語", nameEn: "Sunlit Whisper", quote: "妳總是先體諒別人，卻常常忘了照顧自己。" },
+    立體顯眼款: { nameCn: "琥珀微光", nameEn: "Amber Light", quote: "溫柔是妳的底色，但妳其實比誰都有韌性。" },
+    濃郁存在款: { nameCn: "暮色低語", nameEn: "Dusk Whisper", quote: "妳的溫柔裡藏著故事，靠近才聽得到。" },
+  },
+  almond: {
+    裸妝素顏款: { nameCn: "薄荷晨光", nameEn: "Mint Dawn", quote: "妳不擅長討好，但這樣的妳才最真實。" },
+    日常自然款: { nameCn: "月白輕語", nameEn: "Moonveil Whisper", quote: "妳的距離感，其實是留給對的人的溫柔。" },
+    立體顯眼款: { nameCn: "月光棱鏡", nameEn: "Moonlit Prism", quote: "妳不用說話，眼神就先聲奪人。" },
+    濃郁存在款: { nameCn: "深夜墨色", nameEn: "Midnight Ink", quote: "妳不需要多說，存在本身就是一種態度。" },
+  },
+};
+
+const getPersona = (eyeShapeKey, intensityName) =>
+  personas[eyeShapeKey]?.[intensityName] || personas.round.日常自然款;
+
 // ── 選題後的即時回饋文字 ────────────────────────
 const feedbacks = [
   ["了解妳的眼型輪廓", "記錄妳的睫毛狀態", "鎖定妳的改善方向", "分析妳的日常妝感", "完成診斷"],
-  ["圓眼有天生的放大感✨", "單眼皮最需要的是捲度", "泡泡眼關鍵在輕盈承重", "下垂眼要從眼中段提起", "丹鳳眼讓線條更柔和", "正在分析中"],
+  ["圓眼有天生的放大感✨", "單眼皮最需要的是捲度", "泡泡眼關鍵在輕盈承重", "三角眼要從眼中段提起", "丹鳳眼讓線條更柔和", "正在分析中"],
 ];
 
 const state = {
@@ -196,8 +226,9 @@ const state = {
   answers: [],
   answerLog: [],
   currentResult: null,
-  lastAnswerIndex: null,
   currentIntensity: null,
+  currentPersona: null,
+  lastAnswerIndex: null,
 };
 
 const $ = (selector) => document.querySelector(selector);
@@ -206,7 +237,7 @@ const screens = {
   home: $('[data-screen="home"]'),
   quiz: $('[data-screen="quiz"]'),
   loading: $('[data-screen="loading"]'),
-  result: $('[data-screen="result"]'),
+  card: $('[data-screen="card"]'),
 };
 
 const showScreen = (name) => {
@@ -221,8 +252,9 @@ const resetState = () => {
   state.answers = [];
   state.answerLog = [];
   state.currentResult = null;
-  state.lastAnswerIndex = null;
   state.currentIntensity = null;
+  state.currentPersona = null;
+  state.lastAnswerIndex = null;
 };
 
 // ── GA4 ─────────────────────────────────────────
@@ -359,8 +391,8 @@ const showLoading = () => {
   showScreen("loading");
   window.setTimeout(() => {
     state.currentResult = getTopResult();
-    renderResult();
-    showScreen("result");
+    renderCardScreen();
+    showScreen("card");
     trackEvent("quiz_complete", {
       quiz_name: "eye_shape_quiz",
       result_type: state.currentResult,
@@ -373,92 +405,51 @@ const getTopResult = () => {
   return Object.entries(state.scores).sort((a, b) => b[1] - a[1])[0]?.[0] || fallback;
 };
 
-// ── 結果頁渲染（雜誌診斷書格式）───────────────────
-const renderResult = () => {
+// ── 抽卡結果畫面渲染（人設卡片，翻面後逐步揭露）───────────
+const renderCardScreen = () => {
   const result = results[state.currentResult];
+  const design = result.designs[0];
 
-  $("#resultTitle").textContent = result.name;
-  $("#resultSummary").textContent = result.summary;
-  $("#resultAnalysis").textContent = result.analysis;
-  $("#resultLength").textContent = result.length;
-  $("#lineBooking").href = LINE_BOOKING_URL;
-
-  // 建議妝感卡片（由 Q4 + Q5 決定唯一一款）
   state.currentIntensity = getIntensityLevel();
-  const intensityWrap = $("#resultIntensity");
-  if (intensityWrap) {
-    const level = state.currentIntensity;
-    intensityWrap.innerHTML = `
-      <div class="intensity-item">
-        <strong>${level.name}</strong>
-        <p>${level.desc}</p>
-        <span class="intensity-suited">適合：${level.suited}</span>
-      </div>
-    `;
-  }
+  state.currentPersona = getPersona(state.currentResult, state.currentIntensity.name);
+  const persona = state.currentPersona;
 
-  // 日常保養提醒（精簡 3 點，所有結果共用）
-  $("#careReminder").innerHTML = careReminders.map((item) => `<li>${item}</li>`).join("");
+  $("#personaName").innerHTML =
+    `<span class="persona-name-cn">${persona.nameCn}</span>` +
+    `<span class="persona-name-en">${persona.nameEn}</span>`;
+  $("#personaQuote").textContent = persona.quote;
+  $("#resultDesignBrief").innerHTML = `
+    <strong>${design.name}</strong>
+    <p>${design.desc}</p>
+  `;
+  $("#lineBooking").href = buildLineUrl(result, persona);
 
-  // 推薦設計卡片
-  const designWrap = $("#resultDesigns");
-  if (designWrap) {
-    designWrap.innerHTML = "";
-    result.designs.forEach((d) => {
-      const card = document.createElement("div");
-      card.className = "design-card";
-      card.innerHTML = `
-        <div class="design-card-header">
-          <strong>${d.name}</strong>
-          <span class="design-mood">${d.mood}</span>
-        </div>
-        <p>${d.desc}</p>
-      `;
-      designWrap.appendChild(card);
-    });
-  }
-
-  // 彩蛋：根據結果顯示不同的芊光小語
-  const easterEggs = {
-    round: "圓眼的妳天生就有讓人忍不住多看一眼的靈氣 ✨",
-    monolid: "單眼皮的線條感，是最難被複製的獨特氣質 ✨",
-    puffy: "消腫不是目的，讓眼神輕盈有神才是 ✨",
-    downturned: "下垂眼的溫柔，是種讓人放鬆的力量 ✨",
-    almond: "丹鳳眼的氣質，靜靜地就讓人記住了 ✨",
-  };
-  const eggEl = $("#resultEasterEgg");
-  if (eggEl) eggEl.textContent = easterEggs[state.currentResult] || "";
+  // 重置卡片，讓每次新結果都從卡背（未翻面）開始
+  const flipEl = $("#resultCardFlip");
+  flipEl?.classList.remove("is-lifted", "is-scaled", "is-flipped");
+  $("#cardFaceBack")?.classList.remove("is-revealed");
 };
 
-const buildResultMessage = (result) =>
-  `您好，我完成芊光眼型測驗，結果是「${result.name}」。想預約並討論適合我的睫毛設計。`;
+const flipResultCard = () => {
+  const flipEl = $("#resultCardFlip");
+  if (!flipEl || flipEl.classList.contains("is-flipped")) return;
 
-// ── 複製提示 toast（獨立於選題回饋 toast，避免衝突） ──
-const showCopyToast = (msg) => {
-  let toast = $("#copy-toast");
-  if (!toast) {
-    toast = document.createElement("div");
-    toast.id = "copy-toast";
-    toast.style.cssText = `
-      position:fixed; bottom:32px; left:50%; transform:translateX(-50%) translateY(20px);
-      background:rgba(44,40,37,0.92); color:#fdf9f2;
-      padding:12px 24px; border-radius:999px;
-      font-family:'Noto Serif TC',serif; font-size:0.82rem; letter-spacing:0.06em;
-      opacity:0; transition:opacity 0.3s ease, transform 0.3s ease;
-      pointer-events:none; z-index:999; max-width:80vw; text-align:center;
-      backdrop-filter:blur(8px);
-    `;
-    document.body.appendChild(toast);
-  }
-  toast.textContent = msg;
-  requestAnimationFrame(() => {
-    toast.style.opacity = "1";
-    toast.style.transform = "translateX(-50%) translateY(0)";
-  });
+  trackEvent("card_flip", { result_type: state.currentResult || "unknown" });
+
+  flipEl.classList.add("is-lifted");
+  setTimeout(() => flipEl.classList.add("is-scaled"), 200);
+  setTimeout(() => flipEl.classList.add("is-flipped"), 450);
   setTimeout(() => {
-    toast.style.opacity = "0";
-    toast.style.transform = "translateX(-50%) translateY(10px)";
-  }, 2200);
+    $("#cardFaceBack")?.classList.add("is-revealed");
+  }, 950);
+};
+
+const buildLineUrl = (result, persona) => {
+  const personaLabel = persona ? `${persona.nameCn} ${persona.nameEn}` : result.name;
+  const message = encodeURIComponent(
+    `您好，我完成芊光眼型測驗，我的專屬設計是「${personaLabel}」。想預約並討論適合我的睫毛設計。`
+  );
+  return `https://line.me/R/msg/text/?${message}`;
 };
 
 // ── 分享結果：產生視覺化診斷卡片（IG 限動尺寸 9:16） ────────
@@ -538,7 +529,7 @@ const drawCardEyeImage = (ctx, img, cx, cy, size, radius = 32) => {
   ctx.restore();
 };
 
-const buildShareCard = async (result) => {
+const buildShareCard = async (result, persona) => {
   await document.fonts.ready.catch(() => {});
   const canvas = document.createElement("canvas");
   canvas.width = CARD_W;
@@ -564,66 +555,49 @@ const buildShareCard = async (result) => {
 
   const eyeImg = await loadShareEyeImage().catch(() => null);
   if (eyeImg) {
-    drawCardEyeImage(ctx, eyeImg, CARD_W / 2, 390, 360);
+    drawCardEyeImage(ctx, eyeImg, CARD_W / 2, 370, 320);
   } else {
-    drawCardEye(ctx, CARD_W / 2, 410, 520);
+    drawCardEye(ctx, CARD_W / 2, 390, 460);
   }
 
   ctx.textAlign = "center";
   ctx.fillStyle = "#2c2825";
-  ctx.font = "600 74px 'Noto Serif TC', serif";
-  ctx.fillText(result.name, CARD_W / 2, 650);
+  ctx.font = "600 64px 'Noto Serif TC', serif";
+  ctx.fillText(persona.nameCn, CARD_W / 2, 630);
+
+  ctx.fillStyle = "#c9a876";
+  ctx.font = "italic 400 32px 'Cormorant Garamond', serif";
+  ctx.fillText(persona.nameEn, CARD_W / 2, 678);
 
   ctx.strokeStyle = "#c9a876";
   ctx.lineWidth = 2;
   ctx.beginPath();
-  ctx.moveTo(CARD_W / 2 - 60, 690);
-  ctx.lineTo(CARD_W / 2 + 60, 690);
+  ctx.moveTo(CARD_W / 2 - 60, 718);
+  ctx.lineTo(CARD_W / 2 + 60, 718);
   ctx.stroke();
 
   ctx.textAlign = "left";
   ctx.fillStyle = "#6f6258";
-  ctx.font = "300 34px 'Noto Serif TC', serif";
-  let y = wrapCanvasText(ctx, result.summary, pad, 770, CARD_W - pad * 2, 54) + 76;
+  ctx.font = "300 36px 'Noto Serif TC', serif";
+  let y = wrapCanvasText(ctx, persona.quote, pad, 800, CARD_W - pad * 2, 58) + 90;
 
+  const design = result.designs[0];
   ctx.fillStyle = "#c9a876";
   ctx.font = "600 26px 'Noto Serif TC', serif";
   ctx.fillText("推薦設計", pad, y);
-  result.designs.forEach((d) => {
-    y += 64;
-    ctx.fillStyle = "#2c2825";
-    ctx.font = "600 40px 'Noto Serif TC', serif";
-    ctx.fillText(`・${d.name}`, pad, y);
-    y += 42;
-    ctx.fillStyle = "#8e9c87";
-    ctx.font = "400 26px 'Noto Serif TC', serif";
-    ctx.fillText(d.mood, pad + 30, y);
-  });
-
-  y += 90;
-  ctx.fillStyle = "#c9a876";
-  ctx.font = "600 26px 'Noto Serif TC', serif";
-  ctx.fillText("建議長度", pad, y);
-  y += 54;
+  y += 60;
   ctx.fillStyle = "#2c2825";
-  ctx.font = "600 44px 'Noto Serif TC', serif";
-  ctx.fillText(result.length, pad, y);
+  ctx.font = "600 40px 'Noto Serif TC', serif";
+  ctx.fillText(`・${design.name}`, pad, y);
+  y += 50;
+  ctx.fillStyle = "#6f6258";
+  ctx.font = "300 30px 'Noto Serif TC', serif";
+  y = wrapCanvasText(ctx, design.desc, pad + 30, y, CARD_W - pad * 2 - 30, 44);
 
-  const intensity = state.currentIntensity;
-  if (intensity) {
-    y += 90;
-    ctx.fillStyle = "#c9a876";
-    ctx.font = "600 26px 'Noto Serif TC', serif";
-    ctx.fillText("建議妝感", pad, y);
-    y += 54;
-    ctx.fillStyle = "#2c2825";
-    ctx.font = "600 40px 'Noto Serif TC', serif";
-    ctx.fillText(intensity.name, pad, y);
-    y += 42;
-    ctx.fillStyle = "#6f6258";
-    ctx.font = "300 28px 'Noto Serif TC', serif";
-    ctx.fillText(intensity.desc, pad, y);
-  }
+  y += 66;
+  ctx.fillStyle = "#c9a876";
+  ctx.font = "italic 400 26px 'Cormorant Garamond', serif";
+  ctx.fillText("由芊光眼型資料庫分析", pad, y);
 
   const ctaY = CARD_H - 240;
   ctx.strokeStyle = "rgba(44,40,37,0.15)";
@@ -644,7 +618,7 @@ const buildShareCard = async (result) => {
   return canvas;
 };
 
-const openShareModal = (canvas, result) => {
+const openShareModal = (canvas, persona) => {
   $("#shareModal")?.remove();
 
   const modal = document.createElement("div");
@@ -663,7 +637,7 @@ const openShareModal = (canvas, result) => {
   `;
   const img = document.createElement("img");
   img.src = canvas.toDataURL("image/png");
-  img.alt = `芊光眼型診斷卡片：${result.name}`;
+  img.alt = `芊光 Eye Design Card：${persona.nameCn} ${persona.nameEn}`;
   img.style.cssText = "width:100%; height:100%; display:block; object-fit:cover;";
   imgWrap.appendChild(img);
 
@@ -691,11 +665,11 @@ const openShareModal = (canvas, result) => {
     return btn;
   };
 
-  const downloadBtn = makeBtn("儲存圖片", true);
+  const downloadBtn = makeBtn("下載卡片", true);
   downloadBtn.addEventListener("click", () => {
     const a = document.createElement("a");
     a.href = canvas.toDataURL("image/png");
-    a.download = `qianglow-${state.currentResult || "result"}.png`;
+    a.download = `qianglow-eye-design-card-${state.currentResult || "result"}.png`;
     a.click();
     trackEvent("share_card_download", { result_type: state.currentResult || "unknown" });
   });
@@ -706,10 +680,10 @@ const openShareModal = (canvas, result) => {
     nativeBtn.addEventListener("click", () => {
       canvas.toBlob(async (blob) => {
         if (!blob) return;
-        const file = new File([blob], "qianglow-result.png", { type: "image/png" });
+        const file = new File([blob], "qianglow-eye-design-card.png", { type: "image/png" });
         if (!navigator.canShare({ files: [file] })) return;
         await navigator
-          .share({ files: [file], title: `我的芊光眼型：${result.name}`, text: result.summary })
+          .share({ files: [file], title: `我的 Eye Design Card：${persona.nameCn}`, text: persona.quote })
           .catch(() => {});
         trackEvent("share_card_native", { result_type: state.currentResult || "unknown" });
       }, "image/png");
@@ -730,10 +704,11 @@ const openShareModal = (canvas, result) => {
 
 const share = async () => {
   const result = state.currentResult ? results[state.currentResult] : null;
-  if (!result) return;
+  const persona = state.currentPersona;
+  if (!result || !persona) return;
   trackEvent("share_result_click", { result_type: state.currentResult });
-  const canvas = await buildShareCard(result);
-  openShareModal(canvas, result);
+  const canvas = await buildShareCard(result, persona);
+  openShareModal(canvas, persona);
 };
 
 const initLiff = async () => {
@@ -746,21 +721,22 @@ document.addEventListener("click", (event) => {
   if (!action) return;
   if (action === "start") startQuiz();
   if (action === "quiz-back") goToPreviousQuestion();
-  if (action === "restart") startQuiz();
+  if (action === "flip-card") flipResultCard();
   if (action === "share" || action === "share-result") share();
   if (action === "scroll-knowledge") $("#knowledge").scrollIntoView({ behavior: "smooth", block: "start" });
+});
+
+document.addEventListener("keydown", (event) => {
+  if (event.key !== "Enter" && event.key !== " ") return;
+  if (event.target.closest('[data-action="flip-card"]')) {
+    event.preventDefault();
+    flipResultCard();
+  }
 });
 
 document.addEventListener("click", (event) => {
   if (event.target.closest("#lineBooking")) {
     trackEvent("line_booking_click", { result_type: state.currentResult || "unknown" });
-    const result = state.currentResult ? results[state.currentResult] : null;
-    if (result && navigator.clipboard?.writeText) {
-      navigator.clipboard
-        .writeText(buildResultMessage(result))
-        .then(() => showCopyToast("已複製測驗結果，進入 LINE 後貼上傳送給芊光"))
-        .catch(() => {});
-    }
   }
 });
 

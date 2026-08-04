@@ -106,57 +106,51 @@
             <span></span><span></span><span></span><span></span><span></span>
           </div>
           <p class="eyebrow">Analyzing</p>
-          <h2>正在整理你的眼型線條與睫毛條件</h2>
-          <p>芊光會用更溫柔的方式，找出適合你日常的放大感。</p>
+          <h2>正在分析妳的眼型</h2>
+          <p>芊光會用更溫柔的方式，找出適合妳日常的放大感。</p>
         </div>
       </section>
 
-      <section class="screen screen-result" data-screen="result" aria-live="polite">
-        <header class="result-hero">
-          <p class="eyebrow">Your lash profile</p>
-          <h2 id="resultTitle"></h2>
-          <p id="resultSummary"></p>
-        </header>
-        <!-- 芊光小語（彩蛋） -->
-        <p id="resultEasterEgg" class="result-easter-egg"></p>
-
-        <div class="result-layout">
-          <section class="result-card analysis-card">
-            <span class="card-index">01</span>
-            <h3>眼型分析</h3>
-            <p id="resultAnalysis"></p>
-          </section>
-          <section class="result-card designs-card">
-            <span class="card-index">02</span>
-            <h3>推薦設計</h3>
-            <div id="resultDesigns" class="designs-list"></div>
-            <div class="spec-row">
-              <span class="spec-label">建議長度</span>
-              <span id="resultLength" class="spec-value"></span>
+      <section class="screen screen-card" data-screen="card" aria-live="polite">
+        <div class="card-stage">
+          <p class="eyebrow">Qianglow Studio</p>
+          <div
+            id="resultCardFlip"
+            class="card-flip"
+            data-action="flip-card"
+            role="button"
+            tabindex="0"
+            aria-label="點一下，翻開妳的專屬卡片"
+          >
+            <div class="card-flip-surface">
+              <div class="card-face card-face-front">
+                <span class="card-mark-cn">芊光</span>
+                <span class="card-mark-en">Q I A N G L O W</span>
+                <p class="card-tap-hint">點一下，翻開妳的專屬卡片</p>
+              </div>
+              <div id="cardFaceBack" class="card-face card-face-back">
+                <div class="card-back-inner">
+                  <p class="card-kicker">QIANGLOW · 專屬診斷</p>
+                  <h2 id="personaName" class="persona-name reveal-step" data-step="1"></h2>
+                  <p id="personaQuote" class="persona-quote reveal-step" data-step="2"></p>
+                  <div id="resultDesignBrief" class="design-brief reveal-step" data-step="3"></div>
+                  <p class="data-note reveal-step" data-step="3">由芊光眼型資料庫分析</p>
+                  <div class="card-cta reveal-step" data-step="4">
+                    <a
+                      id="lineBooking"
+                      class="primary-button"
+                      href="https://lin.ee/rspH0C2"
+                      target="_blank"
+                      rel="noreferrer"
+                      >預約我的專屬設計</a
+                    >
+                    <button class="text-button" type="button" data-action="share-result">下載我的 Eye Design Card</button>
+                  </div>
+                </div>
+              </div>
             </div>
-          </section>
-          <section class="result-card intensity-card">
-            <span class="card-index">03</span>
-            <h3>建議妝感</h3>
-            <div id="resultIntensity" class="intensity-list"></div>
-          </section>
+          </div>
         </div>
-        <section class="care-reminder" aria-label="日常保養提醒">
-          <p class="eyebrow">Aftercare</p>
-          <ul id="careReminder" class="care-reminder-list"></ul>
-        </section>
-        <section class="booking-panel" aria-label="LINE 預約">
-          <div>
-            <p class="eyebrow">Reservation</p>
-            <h3>測驗完成。</h3>
-            <p>預約時附上結果，讓這次的設計更貼近妳</p>
-          </div>
-          <div class="booking-actions">
-            <a id="lineBooking" class="primary-button" href="https://lin.ee/Pa0mkmD" target="_blank" rel="noreferrer">LINE 預約</a>
-            <button class="secondary-button" type="button" data-action="restart">重新測驗</button>
-            <button class="text-button" type="button" data-action="share-result">分享結果</button>
-          </div>
-        </section>
       </section>
     </main>
   </body>
